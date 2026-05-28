@@ -135,16 +135,17 @@
     <div>
       <div class="report-brand">Vértice Services</div>
       <div class="report-title">Relatório de Performance LinkedIn</div>
-      <div class="report-subtitle">Rodolfo Basilio — Semanas 1, 2 e 3 · Maio 2026</div>
+      <div class="report-subtitle">Rodolfo Basilio — Semanas 1, 2, 3 e 4 · Maio 2026</div>
     </div>
-    <div class="report-date">Atualizado em 20/05/2026<br>Período: 07/05 – 20/05/2026</div>
+    <div class="report-date">Atualizado em 27/05/2026<br>Período: 07/05 – 27/05/2026</div>
   </div>
 
   <div class="tabs">
     <button class="tab active" onclick="showWeek(1)">Semana 1 — 07/05</button>
     <button class="tab" onclick="showWeek(2)">Semana 2 — 13/05</button>
     <button class="tab" onclick="showWeek(3)">Semana 3 — 20/05</button>
-    <button class="tab" onclick="showWeek(4)">Comparativo</button>
+    <button class="tab" onclick="showWeek(4)">Semana 4 — 27/05</button>
+    <button class="tab" onclick="showWeek(5)">Comparativo</button>
   </div>
 
   <!-- SEMANA 1 -->
@@ -309,54 +310,117 @@
     </div>
   </div>
 
-  <!-- COMPARATIVO -->
+  <!-- SEMANA 4 -->
   <div id="week4" style="display:none;">
+    <div class="section-label">Métricas de alcance</div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Impressões (7 dias)</div>
+        <div class="metric-value">360</div>
+        <div class="metric-delta delta-down">▼ 6,7% vs. 7 dias anteriores</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Seguidores</div>
+        <div class="metric-value">1.964</div>
+        <div class="metric-delta delta-up">▲ +1,0% vs. 7 dias anteriores</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Visualizações de perfil</div>
+        <div class="metric-value">200</div>
+        <div class="metric-delta delta-down">▼ 25,7% vs. 7 dias anteriores</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Aparições em busca</div>
+        <div class="metric-value">29</div>
+        <div class="metric-delta delta-neutral">Mai 19–25 · 0% vs. mai 12–18</div>
+      </div>
+    </div>
 
-    <div class="section-label">Evolução das 3 semanas</div>
+    <div class="section-label">Destaque da semana</div>
+    <div class="highlight-card">
+      <div class="highlight-icon">🔍</div>
+      <div>
+        <div class="highlight-title">Aparições em busca saltaram para 29 — maior valor do período</div>
+        <div class="highlight-desc">Crescimento de +93% vs. semana 3 (15 → 29) — perfil com forte relevância nos resultados de pesquisa</div>
+      </div>
+    </div>
+
+    <div class="section-label">Social Selling Index (SSI)</div>
+    <div class="rank-row">
+      <div class="rank-pill"><div class="rank-pill-label">Ranking no setor</div><div class="rank-pill-value">Top 4% ▲</div></div>
+      <div class="rank-pill"><div class="rank-pill-label">Ranking na rede</div><div class="rank-pill-value">Top 21%</div></div>
+    </div>
+    <div class="spacer"></div>
+    <div class="ssi-card">
+      <div class="ssi-header">
+        <div class="ssi-circle"><div class="ssi-score">52</div><div class="ssi-sub">de 100</div></div>
+        <div><div class="ssi-title">SSI atual: 52/100</div><div class="ssi-desc">Score estável — ranking no setor mantido no top 4%</div></div>
+      </div>
+      <div class="component-row"><div class="component-label">Marca profissional</div><div class="component-bar-bg"><div class="component-bar-fill" style="width:36.996%;background:#378ADD;"></div></div><div class="component-val">9,249 / 25</div></div>
+      <div class="component-row"><div class="component-label">Pessoas certas</div><div class="component-bar-bg"><div class="component-bar-fill" style="width:28%;background:#1D9E75;"></div></div><div class="component-val">7 / 25</div></div>
+      <div class="component-row"><div class="component-label">Engajamento com insights</div><div class="component-bar-bg"><div class="component-bar-fill" style="width:44%;background:#EF9F27;"></div></div><div class="component-val">11 / 25</div></div>
+      <div class="component-row"><div class="component-label">Construção de relacionamentos</div><div class="component-bar-bg"><div class="component-bar-fill" style="width:100%;background:#D4537E;"></div></div><div class="component-val">25 / 25</div></div>
+    </div>
+    <div class="section-label">Benchmarks</div>
+    <div class="benchmark-row">
+      <div class="benchmark-card"><div class="benchmark-title">Média do setor (Financial Services)</div><div class="benchmark-score">31 <span style="font-size:14px;color:var(--text3);">/ 100</span></div><div class="benchmark-desc">Rodolfo está 68% acima da média do setor</div></div>
+      <div class="benchmark-card"><div class="benchmark-title">Média da rede</div><div class="benchmark-score">38 <span style="font-size:14px;color:var(--text3);">/ 100</span></div><div class="benchmark-desc">Rodolfo está 37% acima da média da rede</div></div>
+    </div>
+  </div>
+
+  <!-- COMPARATIVO -->
+  <div id="week5" style="display:none;">
+
+    <div class="section-label">Evolução das 4 semanas</div>
     <div class="legend-row">
       <div class="legend-item"><div class="legend-dot" style="background:#378ADD;"></div>Semana 1 — 07/05</div>
       <div class="legend-item"><div class="legend-dot" style="background:#1D9E75;"></div>Semana 2 — 13/05</div>
       <div class="legend-item"><div class="legend-dot" style="background:#E8A838;"></div>Semana 3 — 20/05</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#D4537E;"></div>Semana 4 — 27/05</div>
     </div>
 
     <div class="compare-bar-row">
       <div class="compare-bar-label">Impressões (7d)</div>
       <div class="compare-bars">
-        <div class="compare-bar" style="width:52.3%;background:#378ADD;"></div>
-        <div class="compare-bar" style="width:38.3%;background:#1D9E75;"></div>
+        <div class="compare-bar" style="width:54.2%;background:#378ADD;"></div>
+        <div class="compare-bar" style="width:39.7%;background:#1D9E75;"></div>
         <div class="compare-bar" style="width:100%;background:#E8A838;"></div>
+        <div class="compare-bar" style="width:100%;background:#D4537E;opacity:0.75;"></div>
       </div>
-      <div class="compare-vals"><div class="compare-val">195</div><div class="compare-val">143</div><div class="compare-val">373</div></div>
+      <div class="compare-vals"><div class="compare-val">195</div><div class="compare-val">143</div><div class="compare-val">373</div><div class="compare-val">360</div></div>
     </div>
 
     <div class="compare-bar-row">
       <div class="compare-bar-label">Seguidores</div>
       <div class="compare-bars">
-        <div class="compare-bar" style="width:97.4%;background:#378ADD;"></div>
-        <div class="compare-bar" style="width:98.9%;background:#1D9E75;"></div>
-        <div class="compare-bar" style="width:100%;background:#E8A838;"></div>
+        <div class="compare-bar" style="width:96.2%;background:#378ADD;"></div>
+        <div class="compare-bar" style="width:97.7%;background:#1D9E75;"></div>
+        <div class="compare-bar" style="width:98.8%;background:#E8A838;"></div>
+        <div class="compare-bar" style="width:100%;background:#D4537E;"></div>
       </div>
-      <div class="compare-vals"><div class="compare-val">1.890</div><div class="compare-val">1.918</div><div class="compare-val">1.940</div></div>
+      <div class="compare-vals"><div class="compare-val">1.890</div><div class="compare-val">1.918</div><div class="compare-val">1.940</div><div class="compare-val">1.964</div></div>
     </div>
 
     <div class="compare-bar-row">
       <div class="compare-bar-label">Visualizações perfil</div>
       <div class="compare-bars">
-        <div class="compare-bar" style="width:92.3%;background:#378ADD;"></div>
-        <div class="compare-bar" style="width:94%;background:#1D9E75;"></div>
-        <div class="compare-bar" style="width:100%;background:#E8A838;"></div>
+        <div class="compare-bar" style="width:84%;background:#378ADD;"></div>
+        <div class="compare-bar" style="width:85.5%;background:#1D9E75;"></div>
+        <div class="compare-bar" style="width:91%;background:#E8A838;"></div>
+        <div class="compare-bar" style="width:100%;background:#D4537E;"></div>
       </div>
-      <div class="compare-vals"><div class="compare-val">168</div><div class="compare-val">171</div><div class="compare-val">182</div></div>
+      <div class="compare-vals"><div class="compare-val">168</div><div class="compare-val">171</div><div class="compare-val">182</div><div class="compare-val">200</div></div>
     </div>
 
     <div class="compare-bar-row">
       <div class="compare-bar-label">Aparições em busca</div>
       <div class="compare-bars">
-        <div class="compare-bar" style="width:80%;background:#378ADD;"></div>
-        <div class="compare-bar" style="width:80%;background:#1D9E75;"></div>
-        <div class="compare-bar" style="width:100%;background:#E8A838;"></div>
+        <div class="compare-bar" style="width:41.4%;background:#378ADD;"></div>
+        <div class="compare-bar" style="width:41.4%;background:#1D9E75;"></div>
+        <div class="compare-bar" style="width:51.7%;background:#E8A838;"></div>
+        <div class="compare-bar" style="width:100%;background:#D4537E;"></div>
       </div>
-      <div class="compare-vals"><div class="compare-val">12</div><div class="compare-val">12</div><div class="compare-val">15</div></div>
+      <div class="compare-vals"><div class="compare-val">12</div><div class="compare-val">12</div><div class="compare-val">15</div><div class="compare-val">29</div></div>
     </div>
 
     <div class="compare-bar-row">
@@ -365,8 +429,9 @@
         <div class="compare-bar" style="width:100%;background:#378ADD;"></div>
         <div class="compare-bar" style="width:100%;background:#1D9E75;"></div>
         <div class="compare-bar" style="width:100%;background:#E8A838;"></div>
+        <div class="compare-bar" style="width:100%;background:#D4537E;"></div>
       </div>
-      <div class="compare-vals"><div class="compare-val">52</div><div class="compare-val">52</div><div class="compare-val">52</div></div>
+      <div class="compare-vals"><div class="compare-val">52</div><div class="compare-val">52</div><div class="compare-val">52</div><div class="compare-val">52</div></div>
     </div>
 
     <div class="section-label">Tabela de evolução completa</div>
@@ -377,54 +442,59 @@
           <th>Sem. 1 — 07/05</th>
           <th>Sem. 2 — 13/05</th>
           <th>Sem. 3 — 20/05</th>
+          <th>Sem. 4 — 27/05</th>
           <th>Variação total</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>Impressões (7d)</td><td>195</td><td>143</td><td>373</td><td class="td-up">▲ +91,3%</td></tr>
-        <tr><td>Seguidores</td><td>1.890</td><td>1.918</td><td>1.940</td><td class="td-up">▲ +50 seguidores</td></tr>
-        <tr><td>Visualizações perfil</td><td>168</td><td>171</td><td>182</td><td class="td-up">▲ +8,3%</td></tr>
-        <tr><td>Aparições em busca</td><td>12</td><td>12</td><td>15</td><td class="td-up">▲ +25%</td></tr>
-        <tr><td>SSI score</td><td>52</td><td>52</td><td>52</td><td class="td-neutral">— Estável</td></tr>
-        <tr><td>Ranking no setor</td><td>Top 5%</td><td>Top 4%</td><td>Top 5%</td><td class="td-neutral">— Estável</td></tr>
-        <tr><td>Ranking na rede</td><td>Top 21%</td><td>Top 21%</td><td>Top 21%</td><td class="td-neutral">— Estável</td></tr>
+        <tr><td>Impressões (7d)</td><td>195</td><td>143</td><td>373</td><td>360</td><td class="td-up">▲ +84,6%</td></tr>
+        <tr><td>Seguidores</td><td>1.890</td><td>1.918</td><td>1.940</td><td>1.964</td><td class="td-up">▲ +74 seguidores</td></tr>
+        <tr><td>Visualizações perfil</td><td>168</td><td>171</td><td>182</td><td>200</td><td class="td-up">▲ +19,0%</td></tr>
+        <tr><td>Aparições em busca</td><td>12</td><td>12</td><td>15</td><td>29</td><td class="td-up">▲ +141,7%</td></tr>
+        <tr><td>SSI score</td><td>52</td><td>52</td><td>52</td><td>52</td><td class="td-neutral">— Estável</td></tr>
+        <tr><td>Ranking no setor</td><td>Top 5%</td><td>Top 4%</td><td>Top 5%</td><td>Top 4%</td><td class="td-up">▲ Melhora</td></tr>
+        <tr><td>Ranking na rede</td><td>Top 21%</td><td>Top 21%</td><td>Top 21%</td><td>Top 21%</td><td class="td-neutral">— Estável</td></tr>
       </tbody>
     </table>
 
     <div class="section-label">Análise e próximos passos</div>
     <div class="insights-box">
       <div class="insight-item">
-        <div class="insight-icon">🚀</div>
-        <div class="insight-text"><strong>Recuperação expressiva das impressões:</strong> após duas semanas de queda consecutiva, a semana 3 reverteu completamente a tendência com +131,7% — o maior resultado do período. Isso indica que as ações de conteúdo da semana surtiram efeito direto.</div>
+        <div class="insight-icon">🔍</div>
+        <div class="insight-text"><strong>Aparições em busca explodiram +93%:</strong> de 15 para 29 na semana 4 — o maior valor desde o início do acompanhamento. Isso indica que o perfil está ganhando visibilidade orgânica de forma acelerada, reflexo direto de atividade consistente e otimização de palavras-chave.</div>
       </div>
       <div class="insight-item">
         <div class="insight-icon">👥</div>
-        <div class="insight-text"><strong>Crescimento consistente de audiência:</strong> +50 seguidores ao longo das 3 semanas, com crescimento semana a semana sem interrupção. A base está em 1.940 seguidores.</div>
+        <div class="insight-text"><strong>Crescimento consistente de audiência:</strong> +74 seguidores ao longo das 4 semanas (1.890 → 1.964), com crescimento semana a semana sem interrupção. A tendência é positiva e estável.</div>
       </div>
       <div class="insight-item">
-        <div class="insight-icon">🔍</div>
-        <div class="insight-text"><strong>Aparições em busca cresceram 25%:</strong> de 12 para 15 buscas — sinal de que o perfil está ganhando relevância nos resultados de pesquisa do LinkedIn, reflexo direto de otimização de palavras-chave e engajamento.</div>
+        <div class="insight-icon">📊</div>
+        <div class="insight-text"><strong>Impressões se mantêm em patamar elevado:</strong> a leve queda de 373 para 360 (−3,5%) após o salto da semana 3 é natural. O novo patamar de impressões está 84,6% acima das 195 da semana 1 — tendência de crescimento consolidada.</div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">📈</div>
+        <div class="insight-text"><strong>Visualizações de perfil em alta histórica:</strong> 200 visualizações (90d) é o maior valor do período, crescendo 19% desde a semana 1. Sinal de que o alcance está convertendo em curiosidade real sobre o perfil.</div>
       </div>
       <div class="insight-item">
         <div class="insight-icon">⚡</div>
-        <div class="insight-text"><strong>SSI estável em 52 — oportunidade de crescimento:</strong> o componente "engajamento com insights" (11/25) segue como ponto mais fraco. Aumentar comentários estratégicos em publicações do setor é a alavanca mais eficiente para elevar o score.</div>
+        <div class="insight-text"><strong>SSI estável em 52 — oportunidade de crescimento:</strong> o componente "engajamento com insights" (11/25) segue como ponto mais fraco. Aumentar comentários estratégicos em publicações do setor é a alavanca mais eficiente para elevar o score e superar a barreira dos 55 pontos.</div>
       </div>
       <div class="insight-item">
         <div class="insight-icon">🎯</div>
-        <div class="insight-text"><strong>Recomendação para semana 4:</strong> manter a frequência de publicação que gerou o salto da semana 3, focar em conteúdo que provoque debate e aumentar interações qualificadas (comentários em posts de referências do setor) para converter o alcance em SSI.</div>
+        <div class="insight-text"><strong>Recomendação para semana 5:</strong> manter a frequência de publicação, aproveitar o crescimento de buscas para publicar conteúdo com palavras-chave estratégicas do setor, e aumentar interações qualificadas (comentários em posts de referências) para converter o alcance em SSI e potenciais conexões comerciais.</div>
       </div>
     </div>
   </div>
 
   <div class="report-footer">
-    Vértice Services · Relatório atualizado em 20 de maio de 2026 · Uso interno — equipe Rodolfo Basilio
+    Vértice Services · Relatório atualizado em 27 de maio de 2026 · Uso interno — equipe Rodolfo Basilio
   </div>
 
 </div>
 
 <script>
 function showWeek(n) {
-  ['week1','week2','week3','week4'].forEach((id,i) => {
+  ['week1','week2','week3','week4','week5'].forEach((id,i) => {
     document.getElementById(id).style.display = (i === n-1) ? 'block' : 'none';
   });
   document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', i === n-1));
