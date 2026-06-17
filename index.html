@@ -16,15 +16,11 @@
 }
 body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh}
 .wrap{max-width:920px;margin:0 auto;padding:2rem 1.5rem 4rem}
-
-/* HEADER */
 .hd{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1.5rem;border-bottom:1.5px solid var(--border2);margin-bottom:2rem;gap:1rem;flex-wrap:wrap}
 .hd-brand{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.12em;color:var(--text3);text-transform:uppercase;margin-bottom:6px}
 .hd-title{font-size:26px;font-weight:normal;color:var(--text);margin-bottom:4px}
 .hd-sub{font-family:'Trebuchet MS',sans-serif;font-size:14px;color:var(--text2)}
 .hd-date{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--text3);text-align:right;padding-top:4px}
-
-/* MONTH TABS */
 .mtabs{display:flex;gap:4px;margin-bottom:0}
 .mtab{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;padding:10px 28px;border-radius:var(--r) var(--r) 0 0;border:1.5px solid transparent;border-bottom:none;cursor:pointer;background:var(--surface2);color:var(--text3);transition:all .15s}
 .mtab:hover{background:#e4e3dc}
@@ -33,15 +29,12 @@ body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-heig
 .mtab.active.junho{border-top:3px solid var(--purple)}
 .mpanel{display:none;background:var(--surface);border:1.5px solid var(--border2);border-radius:0 var(--rl) var(--rl) var(--rl);padding:1.5rem;margin-bottom:2rem}
 .mpanel.active{display:block}
-
-/* WEEK TABS */
 .wtabs{display:flex;gap:5px;margin-bottom:1.5rem;border-bottom:1px solid var(--border);flex-wrap:wrap}
 .wtab{font-family:'Trebuchet MS',sans-serif;font-size:12px;padding:7px 14px;border-radius:var(--r) var(--r) 0 0;border:1px solid transparent;border-bottom:none;cursor:pointer;background:transparent;color:var(--text2);transition:all .15s;margin-bottom:-1px}
 .wtab:hover{background:var(--surface2)}
 .wtab.active{background:var(--bg);border-color:var(--border2);border-bottom-color:var(--bg);color:var(--text);font-weight:bold}
 .wpanel{display:none}
 .wpanel.active{display:block}
-
 .slabel{font-family:'Trebuchet MS',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;margin-top:2rem}
 .slabel:first-child{margin-top:0}
 .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px}
@@ -110,7 +103,6 @@ body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-heig
 .nc-d{font-family:'Trebuchet MS',sans-serif;font-size:12px}
 .sp{height:1rem}
 .footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--text3)}
-/* TOP POSTS */
 .tpost{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:16px 20px;margin-bottom:10px;display:flex;gap:16px;align-items:flex-start}
 .tpost-rank{font-family:'Trebuchet MS',sans-serif;font-size:11px;font-weight:bold;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;width:24px;flex-shrink:0;text-align:center;padding-top:2px}
 .tpost-rank span{display:block;font-size:20px;color:var(--amber);letter-spacing:0}
@@ -137,7 +129,7 @@ body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-heig
     <div class="hd-title">Relatório de Performance LinkedIn</div>
     <div class="hd-sub">Rodolfo Basilio · Maio e Junho 2026</div>
   </div>
-  <div class="hd-date">Atualizado em 03/06/2026<br>Acompanhamento desde 07/05/2026</div>
+  <div class="hd-date">Atualizado em 17/06/2026<br>Acompanhamento desde 07/05/2026</div>
 </div>
 
 <div class="mtabs">
@@ -167,7 +159,6 @@ body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-heig
     <button class="wtab" onclick="showWM(5)">Comparativo</button>
   </div>
 
-  <!-- M-S1 -->
   <div id="mw1" class="wpanel active">
     <div class="slabel">Métricas de alcance</div>
     <div class="mgrid">
@@ -199,7 +190,6 @@ body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-heig
     </div>
   </div>
 
-  <!-- M-S2 -->
   <div id="mw2" class="wpanel">
     <div class="slabel">Métricas de alcance</div>
     <div class="mgrid">
@@ -231,7 +221,6 @@ body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-heig
     </div>
   </div>
 
-  <!-- M-S3 -->
   <div id="mw3" class="wpanel">
     <div class="slabel">Métricas de alcance</div>
     <div class="mgrid">
@@ -265,7 +254,6 @@ body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-heig
     </div>
   </div>
 
-  <!-- M-S4 -->
   <div id="mw4" class="wpanel">
     <div class="slabel">Métricas de alcance</div>
     <div class="mgrid">
@@ -299,7 +287,6 @@ body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-heig
     </div>
   </div>
 
-  <!-- COMPARATIVO MAIO -->
   <div id="mw5" class="wpanel">
     <div class="slabel">Evolução das 4 semanas — Maio 2026</div>
     <div class="legrow">
@@ -382,7 +369,8 @@ body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-heig
 <div id="p-junho" class="mpanel">
   <div class="wtabs">
     <button class="wtab" onclick="showWJ(1)">Sem. 1 — 03/06</button>
-    <button class="wtab active" onclick="showWJ(2)">Sem. 2 — 10/06</button>
+    <button class="wtab" onclick="showWJ(2)">Sem. 2 — 10/06</button>
+    <button class="wtab active" onclick="showWJ(3)">Sem. 3 — 17/06</button>
   </div>
 
   <!-- J-S1 -->
@@ -441,10 +429,9 @@ body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-heig
       <div class="iitem"><div class="iicon">🎯</div><div class="itext"><strong>Objetivo da semana 2:</strong> recuperar impressões acima de 300, captar mais assinantes da newsletter e aumentar engajamento com insights para elevar o SSI além de 52.</div></div>
     </div>
   </div>
-</div>
 
   <!-- J-S2 -->
-  <div id="jw2" class="wpanel active">
+  <div id="jw2" class="wpanel">
     <div class="slabel">Métricas de alcance</div>
     <div class="mgrid">
       <div class="mc"><div class="mc-lbl">Impressões (7 dias)</div><div class="mc-val">1.846</div><div class="mc-d dup">▲ +692% vs. semana anterior 🚀</div></div>
@@ -499,10 +486,68 @@ body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-heig
       <div class="iitem"><div class="iicon">🎯</div><div class="itext"><strong>Objetivo da semana 3:</strong> identificar o conteúdo responsável pelo pico de impressões e replicar o padrão, além de trabalhar engajamento com insights para elevar o SSI.</div></div>
     </div>
   </div>
+
+  <!-- J-S3 -->
+  <div id="jw3" class="wpanel active">
+    <div class="slabel">Métricas de alcance</div>
+    <div class="mgrid">
+      <div class="mc"><div class="mc-lbl">Impressões (7 dias)</div><div class="mc-val">341</div><div class="mc-d ddn">▼ −82% vs. semana anterior</div></div>
+      <div class="mc"><div class="mc-lbl">Seguidores</div><div class="mc-val">2.033</div><div class="mc-d dup">▲ +1% vs. semana anterior</div></div>
+      <div class="mc"><div class="mc-lbl">Visualizações de perfil</div><div class="mc-val">250</div><div class="mc-d dup">▲ Novo recorde histórico</div></div>
+      <div class="mc"><div class="mc-lbl">Aparições em busca</div><div class="mc-val">22</div><div class="mc-d dnt">Jun 2–8 · 0% vs. Mai 26–Jun 1</div></div>
+    </div>
+    <div class="slabel">Newsletter</div>
+    <div class="nrow">
+      <div class="nc"><div class="nc-l">Visualizações de artigo (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. 7 dias anteriores</div></div>
+      <div class="nc"><div class="nc-l">Novos assinantes (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. semana anterior</div></div>
+    </div>
+    <div class="slabel">Destaque da semana</div>
+    <div class="hlcard"><div class="hlicon">📈</div><div><div class="hltitle">SSI sobe para 53 — primeiro avanço desde o início do acompanhamento</div><div class="hldesc">Pessoas certas subiu de 7 para 7,438 — componente que estava estagnado começa a se mover. Visualizações de perfil atingem novo recorde: 250.</div></div></div>
+    <div class="slabel">Social Selling Index (SSI)</div>
+    <div class="rrow">
+      <div class="rpill"><div class="rpill-lbl">Ranking no setor</div><div class="rpill-val">Top 4%</div></div>
+      <div class="rpill"><div class="rpill-lbl">Ranking na rede</div><div class="rpill-val">Top 20% ▲</div></div>
+    </div>
+    <div class="sp"></div>
+    <div class="ssic">
+      <div class="ssih">
+        <div class="ssicircle"><div class="ssiscore">53</div><div class="ssisub">de 100</div></div>
+        <div><div class="ssititle">SSI: 53/100 ▲ — novo máximo!</div><div class="ssidesc">Subiu 1 ponto pela primeira vez desde o início do acompanhamento</div></div>
+      </div>
+      <div class="crow"><div class="clbl">Marca profissional</div><div class="cbg"><div class="cfill" style="width:37%;background:#378ADD"></div></div><div class="cval">9,249 / 25</div></div>
+      <div class="crow"><div class="clbl">Pessoas certas</div><div class="cbg"><div class="cfill" style="width:29.75%;background:#1D9E75"></div></div><div class="cval">7,438 / 25</div></div>
+      <div class="crow"><div class="clbl">Engajamento com insights</div><div class="cbg"><div class="cfill" style="width:44%;background:#EF9F27"></div></div><div class="cval">11 / 25</div></div>
+      <div class="crow"><div class="clbl">Construção de relacionamentos</div><div class="cbg"><div class="cfill" style="width:100%;background:#D4537E"></div></div><div class="cval">25 / 25</div></div>
+    </div>
+    <div class="slabel">Benchmarks</div>
+    <div class="brow">
+      <div class="bc"><div class="bc-t">Média do setor (Financial Services)</div><div class="bc-s">31 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 71% acima da média</div></div>
+      <div class="bc"><div class="bc-t">Média da rede</div><div class="bc-s">39 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 36% acima da média</div></div>
+    </div>
+    <div class="slabel">Comparativo vs. Sem. 2 de Junho</div>
+    <div class="legrow">
+      <div class="legitem"><div class="legdot" style="background:#1D9E75"></div>Sem. 2 Junho — 10/06</div>
+      <div class="legitem"><div class="legdot" style="background:#378ADD"></div>Sem. 3 Junho — 17/06</div>
+    </div>
+    <div class="cbrow"><div class="cblbl">Impressões (7d)</div><div class="cbars"><div class="cbar" style="width:100%;background:#1D9E75"></div><div class="cbar" style="width:18.5%;background:#378ADD"></div></div><div class="cvals"><div class="cval2">1.846</div><div class="cval2">341</div></div></div>
+    <div class="cbrow"><div class="cblbl">Seguidores</div><div class="cbars"><div class="cbar" style="width:98.5%;background:#1D9E75"></div><div class="cbar" style="width:100%;background:#378ADD"></div></div><div class="cvals"><div class="cval2">2.003</div><div class="cval2">2.033</div></div></div>
+    <div class="cbrow"><div class="cblbl">Visualizações perfil</div><div class="cbars"><div class="cbar" style="width:93.6%;background:#1D9E75"></div><div class="cbar" style="width:100%;background:#378ADD"></div></div><div class="cvals"><div class="cval2">234</div><div class="cval2">250</div></div></div>
+    <div class="cbrow"><div class="cblbl">Aparições em busca</div><div class="cbars"><div class="cbar" style="width:100%;background:#1D9E75"></div><div class="cbar" style="width:100%;background:#378ADD"></div></div><div class="cvals"><div class="cval2">22</div><div class="cval2">22</div></div></div>
+    <div class="cbrow"><div class="cblbl">SSI score</div><div class="cbars"><div class="cbar" style="width:98%;background:#1D9E75"></div><div class="cbar" style="width:100%;background:#378ADD"></div></div><div class="cvals"><div class="cval2">52</div><div class="cval2">53</div></div></div>
+    <div class="slabel">Análise da semana</div>
+    <div class="ibox">
+      <div class="iitem"><div class="iicon">📉</div><div class="itext"><strong>Impressões recuam após pico histórico:</strong> queda de 1.846 para 341 (−82%) é natural após o salto excepcional da semana anterior. O patamar de 341 ainda está acima das semanas 1 e 2 de Junho e acima de todas as semanas de Maio, exceto a sem. 3 e 4.</div></div>
+      <div class="iitem"><div class="iicon">👥</div><div class="itext"><strong>+30 seguidores na semana:</strong> a base chegou a 2.033 — crescimento sólido, mantendo a linha ascendente pós-marco dos 2.000.</div></div>
+      <div class="iitem"><div class="iicon">👁️</div><div class="itext"><strong>Visualizações de perfil atingem novo recorde: 250</strong> — supera os 234 da semana anterior. O interesse pelo perfil cresce de forma independente das variações de impressões.</div></div>
+      <div class="iitem"><div class="iicon">📈</div><div class="itext"><strong>SSI sobe para 53 — primeiro avanço do período:</strong> o ponto de melhora veio de "Pessoas certas" (7 → 7,438). Engajamento com insights (11/25) continua sendo a maior alavanca disponível para seguir subindo.</div></div>
+      <div class="iitem"><div class="iicon">🎯</div><div class="itext"><strong>Objetivo da semana 4:</strong> manter visualizações de perfil acima de 250, continuar aumentando "Pessoas certas" e iniciar movimento no componente "Engajamento com insights" para elevar SSI acima de 53.</div></div>
+    </div>
+  </div>
+
 </div>
 
 <div class="footer">
-  Vértice Services · Relatório atualizado em 10 de junho de 2026 · Uso interno — equipe Rodolfo Basilio
+  Vértice Services · Relatório atualizado em 17 de junho de 2026 · Uso interno — equipe Rodolfo Basilio
 </div>
 </div>
 
@@ -524,7 +569,7 @@ function showWM(n){
   });
 }
 function showWJ(n){
-  ['jw1','jw2'].forEach((id,i)=>{
+  ['jw1','jw2','jw3'].forEach((id,i)=>{
     document.getElementById(id).classList.toggle('active',i===n-1);
   });
   document.querySelectorAll('#p-junho .wtab').forEach((t,i)=>{
