@@ -27,6 +27,7 @@ body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-heig
 .mtab.active{background:var(--surface);border-color:var(--border2);border-bottom-color:var(--surface);color:var(--text)}
 .mtab.active.maio{border-top:3px solid var(--blue)}
 .mtab.active.junho{border-top:3px solid var(--purple)}
+.mtab.active.julho{border-top:3px solid var(--teal)}
 .mpanel{display:none;background:var(--surface);border:1.5px solid var(--border2);border-radius:0 var(--rl) var(--rl) var(--rl);padding:1.5rem;margin-bottom:2rem}
 .mpanel.active{display:block}
 .wtabs{display:flex;gap:5px;margin-bottom:1.5rem;border-bottom:1px solid var(--border);flex-wrap:wrap}
@@ -127,18 +128,19 @@ body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-heig
   <div>
     <div class="hd-brand">Vértice Services</div>
     <div class="hd-title">Relatório de Performance LinkedIn</div>
-    <div class="hd-sub">Rodolfo Basilio · Maio e Junho 2026</div>
+    <div class="hd-sub">Rodolfo Basilio · Maio, Junho e Julho 2026</div>
   </div>
-  <div class="hd-date">Atualizado em 17/06/2026<br>Acompanhamento desde 07/05/2026</div>
+  <div class="hd-date">Atualizado em 01/07/2026<br>Acompanhamento desde 07/05/2026</div>
 </div>
 
 <div class="mtabs">
-  <button class="mtab maio active" onclick="showMonth('maio')">📅 Maio 2026</button>
+  <button class="mtab maio" onclick="showMonth('maio')">📅 Maio 2026</button>
   <button class="mtab junho" onclick="showMonth('junho')">📅 Junho 2026</button>
+  <button class="mtab julho active" onclick="showMonth('julho')">📅 Julho 2026</button>
 </div>
 
 <!-- ========== MAIO ========== -->
-<div id="p-maio" class="mpanel active">
+<div id="p-maio" class="mpanel">
   <div class="msum">
     <div class="msum-t">Resumo consolidado — Maio 2026 (4 semanas)</div>
     <div class="msum-g">
@@ -718,14 +720,69 @@ body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-heig
 
 </div>
 
+<!-- ========== JULHO ========== -->
+<div id="p-julho" class="mpanel active">
+  <div class="wtabs">
+    <button class="wtab active" onclick="showWJl(1)">Sem. 1 — 01/07</button>
+  </div>
+
+  <div id="jlw1" class="wpanel active">
+    <div class="slabel">Métricas de alcance</div>
+    <div class="mgrid">
+      <div class="mc"><div class="mc-lbl">Impressões (7 dias)</div><div class="mc-val">255</div><div class="mc-d ddn">▼ 42% vs. 7 dias anteriores</div></div>
+      <div class="mc"><div class="mc-lbl">Seguidores</div><div class="mc-val">2.078</div><div class="mc-d dup">▲ +1% vs. 7 dias anteriores</div></div>
+      <div class="mc"><div class="mc-lbl">Visualizações de perfil</div><div class="mc-val">273</div><div class="mc-d ddn">▼ 39% vs. 7 dias anteriores (base 90 dias)</div></div>
+      <div class="mc"><div class="mc-lbl">Aparições em busca</div><div class="mc-val">10</div><div class="mc-d dnt">Jun 16–22 · 0% vs. Jun 9–15</div></div>
+    </div>
+    <div class="slabel">Newsletter</div>
+    <div class="nrow">
+      <div class="nc"><div class="nc-l">Visualizações de artigo (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. 7 dias anteriores</div></div>
+      <div class="nc"><div class="nc-l">Novos assinantes (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. 7 dias anteriores</div></div>
+    </div>
+    <div class="slabel">Destaque da semana</div>
+    <div class="hlcard"><div class="hlicon">👥</div><div><div class="hltitle">Seguidores ultrapassam 2.078 — crescimento contínuo</div><div class="hldesc">Impressões e visualizações de perfil recuaram na virada do mês, mas a base de seguidores segue em trajetória de alta ininterrupta desde maio.</div></div></div>
+    <div class="slabel">Social Selling Index (SSI)</div>
+    <div class="rrow">
+      <div class="rpill"><div class="rpill-lbl">Ranking no setor</div><div class="rpill-val">Top 4% <span style="font-size:12px;color:var(--text3)">— sem alteração</span></div></div>
+      <div class="rpill"><div class="rpill-lbl">Ranking na rede</div><div class="rpill-val">Top 19% <span style="font-size:12px;color:var(--text3)">— sem alteração</span></div></div>
+    </div>
+    <div class="sp"></div>
+    <div class="ssic">
+      <div class="ssih">
+        <div class="ssicircle"><div class="ssiscore">53</div><div class="ssisub">de 100</div></div>
+        <div><div class="ssititle">SSI: 53/100 — estável</div><div class="ssidesc">Score mantido pela 2ª semana consecutiva; "Pessoas certas" recuou levemente (7,813 → 7,75)</div></div>
+      </div>
+      <div class="crow"><div class="clbl">Marca profissional</div><div class="cbg"><div class="cfill" style="width:37%;background:#378ADD"></div></div><div class="cval">9,249 / 25</div></div>
+      <div class="crow"><div class="clbl">Pessoas certas</div><div class="cbg"><div class="cfill" style="width:31%;background:#1D9E75"></div></div><div class="cval">7,75 / 25</div></div>
+      <div class="crow"><div class="clbl">Engajamento com insights</div><div class="cbg"><div class="cfill" style="width:44%;background:#EF9F27"></div></div><div class="cval">11 / 25</div></div>
+      <div class="crow"><div class="clbl">Construção de relacionamentos</div><div class="cbg"><div class="cfill" style="width:100%;background:#D4537E"></div></div><div class="cval">25 / 25</div></div>
+    </div>
+    <div class="slabel">Benchmarks</div>
+    <div class="brow">
+      <div class="bc"><div class="bc-t">Média do setor (Financial Services)</div><div class="bc-s">31 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 71% acima da média</div></div>
+      <div class="bc"><div class="bc-t">Média da rede</div><div class="bc-s">39 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 36% acima da média</div></div>
+    </div>
+    <div class="slabel">Análise da semana</div>
+    <div class="ibox">
+      <div class="iitem"><div class="iicon">📉</div><div class="itext"><strong>Impressões recuam para 255:</strong> queda de 42% vs. 7 dias anteriores, na linha do padrão de desaceleração já visto nas viradas de mês de Junho.</div></div>
+      <div class="iitem"><div class="iicon">👥</div><div class="itext"><strong>+21 seguidores na semana:</strong> base chegou a 2.078, mantendo o ritmo de crescimento consistente observado desde maio.</div></div>
+      <div class="iitem"><div class="iicon">🔍</div><div class="itext"><strong>Aparições em busca seguem em 10:</strong> LinkedIn ainda não atualizou essa métrica desde a última leitura (Jun 16–22) — sem dado novo confirmado, segue como ponto de atenção prioritário.</div></div>
+      <div class="iitem"><div class="iicon">📊</div><div class="itext"><strong>SSI estável em 53/100:</strong> "Engajamento com insights" (11/25) continua sendo o componente com maior potencial de ganho rápido.</div></div>
+      <div class="iitem"><div class="iicon">🎯</div><div class="itext"><strong>Objetivo da semana 2 de Julho:</strong> confirmar atualização das aparições em busca, recuperar impressões acima de 300 e aumentar comentários estratégicos para elevar "Engajamento com insights".</div></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
 <div class="footer">
-  Vértice Services · Relatório atualizado em 17 de junho de 2026 · Uso interno — equipe Rodolfo Basilio
+  Vértice Services · Relatório atualizado em 1 de julho de 2026 · Uso interno — equipe Rodolfo Basilio
 </div>
 </div>
 
 <script>
 function showMonth(m){
-  ['maio','junho'].forEach(x=>{
+  ['maio','junho','julho'].forEach(x=>{
     document.getElementById('p-'+x).classList.toggle('active',x===m);
   });
   document.querySelectorAll('.mtab').forEach(t=>{
@@ -745,6 +802,14 @@ function showWJ(n){
     document.getElementById(id).classList.toggle('active',i===n-1);
   });
   document.querySelectorAll('#p-junho .wtab').forEach((t,i)=>{
+    t.classList.toggle('active',i===n-1);
+  });
+}
+function showWJl(n){
+  ['jlw1'].forEach((id,i)=>{
+    document.getElementById(id).classList.toggle('active',i===n-1);
+  });
+  document.querySelectorAll('#p-julho .wtab').forEach((t,i)=>{
     t.classList.toggle('active',i===n-1);
   });
 }
