@@ -448,7 +448,7 @@ function renderTrend(){
   });
 
   const data = weeksFor(currentPeriod);
-  const labels = data.map(w=>w.label);
+  const labels = data.map(w=>w.date);
   const values = data.map(w=>w[currentMetric]);
   const color = COLORS[currentMetric];
 
@@ -486,7 +486,13 @@ function renderTrend(){
         tooltip:{
           backgroundColor:'#14213D', padding:10, cornerRadius:8,
           titleFont:{family:'Inter',weight:'700'}, bodyFont:{family:'Inter'},
-          callbacks:{ label:(ctx)=> ' '+fmt(ctx.parsed.y) }
+          callbacks:{
+            title:(items)=> {
+              const w = data[items[0].dataIndex];
+              return `${w.month} · ${w.date}`;
+            },
+            label:(ctx)=> ' '+fmt(ctx.parsed.y)
+          }
         }
       },
       scales:{
