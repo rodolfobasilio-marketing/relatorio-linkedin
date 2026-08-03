@@ -3,975 +3,681 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Relatório LinkedIn — Rodolfo Basilio | Vértice Services</title>
+<title>Painel LinkedIn — Rodolfo Basilio | Vértice Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f7f6f2;--surface:#fff;--surface2:#f0efe9;
-  --border:rgba(0,0,0,.1);--border2:rgba(0,0,0,.18);
-  --text:#1a1a18;--text2:#5c5c58;--text3:#9a9994;
-  --blue:#378ADD;--green:#3B6D11;--green-light:#EAF3DE;--green-mid:#639922;
-  --amber:#EF9F27;--red:#A32D2D;--teal:#1D9E75;--pink:#D4537E;--purple:#7B5EA7;
-  --r:8px;--rl:12px;
+  --ink:#14213D; --ink-soft:#2B3B5C;
+  --paper:#F6F4EE; --card:#FFFFFF; --card-line:#E4E0D5;
+  --text:#1D2233; --text2:#5B5F6E; --text3:#96968D;
+  --emerald:#1F6F54; --emerald-soft:#E4F0EA;
+  --amber:#C97A2B; --amber-soft:#FBEEDF;
+  --rose:#B84B63; --rose-soft:#F7E6EA;
+  --gold:#B08C3D;
+  --r:14px; --r-sm:9px;
 }
-body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh}
-.wrap{max-width:920px;margin:0 auto;padding:2rem 1.5rem 4rem}
-.hd{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1.5rem;border-bottom:1.5px solid var(--border2);margin-bottom:2rem;gap:1rem;flex-wrap:wrap}
-.hd-brand{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.12em;color:var(--text3);text-transform:uppercase;margin-bottom:6px}
-.hd-title{font-size:26px;font-weight:normal;color:var(--text);margin-bottom:4px}
-.hd-sub{font-family:'Trebuchet MS',sans-serif;font-size:14px;color:var(--text2)}
-.hd-date{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--text3);text-align:right;padding-top:4px}
-.mtabs{display:flex;gap:4px;margin-bottom:0}
-.mtab{font-family:'Trebuchet MS',sans-serif;font-size:14px;font-weight:bold;padding:10px 28px;border-radius:var(--r) var(--r) 0 0;border:1.5px solid transparent;border-bottom:none;cursor:pointer;background:var(--surface2);color:var(--text3);transition:all .15s}
-.mtab:hover{background:#e4e3dc}
-.mtab.active{background:var(--surface);border-color:var(--border2);border-bottom-color:var(--surface);color:var(--text)}
-.mtab.active.maio{border-top:3px solid var(--blue)}
-.mtab.active.junho{border-top:3px solid var(--purple)}
-.mtab.active.julho{border-top:3px solid var(--green-mid)}
-.mpanel{display:none;background:var(--surface);border:1.5px solid var(--border2);border-radius:0 var(--rl) var(--rl) var(--rl);padding:1.5rem;margin-bottom:2rem}
-.mpanel.active{display:block}
-.wtabs{display:flex;gap:5px;margin-bottom:1.5rem;border-bottom:1px solid var(--border);flex-wrap:wrap}
-.wtab{font-family:'Trebuchet MS',sans-serif;font-size:12px;padding:7px 14px;border-radius:var(--r) var(--r) 0 0;border:1px solid transparent;border-bottom:none;cursor:pointer;background:transparent;color:var(--text2);transition:all .15s;margin-bottom:-1px}
-.wtab:hover{background:var(--surface2)}
-.wtab.active{background:var(--bg);border-color:var(--border2);border-bottom-color:var(--bg);color:var(--text);font-weight:bold}
-.wpanel{display:none}
-.wpanel.active{display:block}
-.slabel{font-family:'Trebuchet MS',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;margin-top:2rem}
-.slabel:first-child{margin-top:0}
-.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px}
-.mc{background:var(--surface2);border:1px solid var(--border);border-radius:var(--rl);padding:16px 18px}
-.mc-lbl{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--text2);margin-bottom:8px}
-.mc-val{font-size:26px;font-weight:normal;color:var(--text);line-height:1;margin-bottom:6px}
-.mc-d{font-family:'Trebuchet MS',sans-serif;font-size:12px}
-.dup{color:#3B6D11}.ddn{color:#A32D2D}.dnt{color:var(--text3)}
-.rrow{display:flex;gap:10px}
-.rpill{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:var(--rl);padding:14px 18px}
-.rpill-lbl{font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
-.rpill-val{font-size:20px;color:var(--text)}
-.ssic{background:var(--surface2);border:1px solid var(--border);border-radius:var(--rl);padding:20px}
-.ssih{display:flex;align-items:center;gap:20px;margin-bottom:20px}
-.ssicircle{width:72px;height:72px;border-radius:50%;border:3px solid var(--blue);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;background:var(--surface)}
-.ssiscore{font-size:26px;color:var(--blue);line-height:1}
-.ssisub{font-family:'Trebuchet MS',sans-serif;font-size:10px;color:var(--text3)}
-.ssititle{font-size:16px;color:var(--text);margin-bottom:3px}
-.ssidesc{font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--text2)}
-.crow{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.clbl{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--text2);width:185px;flex-shrink:0}
-.cbg{flex:1;height:7px;background:rgba(0,0,0,.08);border-radius:4px;overflow:hidden}
-.cfill{height:100%;border-radius:4px}
-.cval{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--text2);width:52px;text-align:right;flex-shrink:0}
-.brow{display:flex;gap:10px}
-.bc{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:14px 18px}
-.bc-t{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--text2);margin-bottom:6px}
-.bc-s{font-size:22px;color:var(--text);margin-bottom:2px}
-.bc-d{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--text3)}
-.cbrow{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.cblbl{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--text2);width:160px;flex-shrink:0}
-.cbars{flex:1;display:flex;flex-direction:column;gap:4px}
-.cbar{height:9px;border-radius:5px}
-.cvals{display:flex;flex-direction:column;gap:4px;width:60px;text-align:right}
-.cval2{font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--text2)}
-.legrow{display:flex;gap:18px;margin-bottom:16px;flex-wrap:wrap}
-.legitem{display:flex;align-items:center;gap:6px;font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--text2)}
-.legdot{width:12px;height:12px;border-radius:3px}
-.ibox{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:20px}
-.iitem{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border)}
-.iitem:last-child{border-bottom:none;padding-bottom:0}
-.iicon{font-size:18px;flex-shrink:0;margin-top:1px}
-.itext{font-family:'Trebuchet MS',sans-serif;font-size:14px;color:var(--text2);line-height:1.6}
-.ttable{width:100%;border-collapse:collapse;background:var(--surface);border-radius:var(--rl);overflow:hidden;border:1px solid var(--border)}
-.ttable th{font-family:'Trebuchet MS',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);background:var(--surface2);padding:10px 14px;text-align:left;font-weight:normal;border-bottom:1px solid var(--border)}
-.ttable td{font-family:'Trebuchet MS',sans-serif;font-size:13px;padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2)}
-.ttable tr:last-child td{border-bottom:none}
-.ttable td:first-child{color:var(--text);font-weight:bold}
-.tup{color:#3B6D11!important}.tdn{color:#A32D2D!important}.tnt{color:var(--text3)!important}
-.hlcard{background:#EAF3DE;border:1px solid rgba(99,153,34,.3);border-radius:var(--rl);padding:16px 20px;display:flex;align-items:center;gap:16px}
-.hlcard.info{background:#EEF4FF;border-color:rgba(55,138,221,.3)}
-.hlicon{font-size:24px}
-.hltitle{font-size:16px;color:var(--text);margin-bottom:3px}
-.hldesc{font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--text2)}
-.msum{background:linear-gradient(135deg,#1a3a5c 0%,#2563a8 100%);border-radius:var(--rl);padding:24px;color:#fff;margin-bottom:1.5rem}
-.msum-t{font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.7;margin-bottom:8px}
-.msum-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:16px;margin-top:16px}
-.msum-v{font-size:28px;font-weight:normal;line-height:1;margin-bottom:4px}
-.msum-l{font-family:'Trebuchet MS',sans-serif;font-size:11px;opacity:.7}
-.msum-d{font-family:'Trebuchet MS',sans-serif;font-size:12px}
-.sup{color:#86efac}.sdn{color:#fca5a5}.snt{color:rgba(255,255,255,.6)}
-.nrow{display:flex;gap:10px}
-.nc{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:var(--rl);padding:14px 18px}
-.nc-l{font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--text2);margin-bottom:6px}
-.nc-v{font-size:22px;color:var(--text);margin-bottom:4px}
-.nc-d{font-family:'Trebuchet MS',sans-serif;font-size:12px}
-.sp{height:1rem}
-.footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;font-family:'Trebuchet MS',sans-serif;font-size:12px;color:var(--text3)}
-.tpost{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:16px 20px;margin-bottom:10px;display:flex;gap:16px;align-items:flex-start}
-.tpost-rank{font-family:'Trebuchet MS',sans-serif;font-size:11px;font-weight:bold;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;width:24px;flex-shrink:0;text-align:center;padding-top:2px}
-.tpost-rank span{display:block;font-size:20px;color:var(--amber);letter-spacing:0}
-.tpost-body{flex:1}
-.tpost-preview{font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--text);line-height:1.5;margin-bottom:8px;font-style:italic}
-.tpost-meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.tpost-tag{font-family:'Trebuchet MS',sans-serif;font-size:11px;padding:3px 8px;border-radius:20px;display:inline-flex;align-items:center;gap:4px}
-.tag-foto{background:#EEF4FF;color:#2563a8;border:1px solid rgba(55,138,221,.25)}
-.tag-texto{background:var(--surface2);color:var(--text3);border:1px solid var(--border)}
-.tpost-imp{font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--green-mid);font-weight:bold;margin-left:auto;flex-shrink:0}
-.tpost-eng{font-family:'Trebuchet MS',sans-serif;font-size:11px;color:var(--text3)}
-.foto-insight{background:linear-gradient(135deg,#EEF4FF 0%,#F0EBFF 100%);border:1px solid rgba(123,94,167,.2);border-radius:var(--rl);padding:16px 20px;display:flex;gap:14px;align-items:flex-start;margin-top:4px}
-.foto-insight-icon{font-size:22px;flex-shrink:0}
-.foto-insight-title{font-size:15px;color:var(--text);margin-bottom:4px}
-.foto-insight-desc{font-family:'Trebuchet MS',sans-serif;font-size:13px;color:var(--text2);line-height:1.6}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--paper);
+  color:var(--text);
+  background-image:
+    radial-gradient(circle at 100% 0%, rgba(20,33,61,0.05), transparent 55%),
+    radial-gradient(circle at 0% 100%, rgba(31,111,84,0.05), transparent 55%);
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px 80px}
+::selection{background:var(--gold);color:#fff}
+
+/* ---------- HEADER ---------- */
+header.top{
+  position:sticky;top:0;z-index:40;
+  background:rgba(246,244,238,0.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--card-line);
+}
+.top-inner{max-width:1180px;margin:0 auto;padding:18px 24px 14px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.brand{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--emerald);margin-bottom:6px}
+.h-title{font-family:'Fraunces',serif;font-size:clamp(22px,3vw,30px);font-weight:600;color:var(--ink);line-height:1.1}
+.h-sub{font-size:13.5px;color:var(--text2);margin-top:4px}
+.h-meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text3);text-align:right;line-height:1.6}
+
+.periodbar{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;gap:6px;flex-wrap:wrap;padding-bottom:14px}
+.ptab{
+  font-family:'Inter',sans-serif;font-weight:600;font-size:13.5px;
+  padding:9px 18px;border-radius:100px;border:1.5px solid var(--card-line);
+  background:#fff;color:var(--text2);cursor:pointer;transition:.15s;
+  display:flex;align-items:center;gap:7px;
+}
+.ptab:hover{border-color:var(--ink);color:var(--ink)}
+.ptab.active{background:var(--ink);border-color:var(--ink);color:#fff}
+.ptab .dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.55}
+
+/* ---------- SECTIONS ---------- */
+section{padding-top:46px}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--card-line)}
+h2.sec-title{font-family:'Fraunces',serif;font-weight:600;font-size:23px;color:var(--ink);margin-bottom:4px}
+.sec-desc{font-size:13.5px;color:var(--text2);max-width:640px;margin-bottom:22px}
+
+/* ---------- KPI CARDS ---------- */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.kpi{
+  background:var(--card);border:1px solid var(--card-line);border-radius:var(--r);
+  padding:20px 20px 18px;position:relative;overflow:hidden;transition:.2s;
+}
+.kpi:hover{border-color:var(--ink-soft);transform:translateY(-2px)}
+.kpi-lbl{font-size:12px;color:var(--text2);font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.kpi-lbl .info{width:14px;height:14px;border-radius:50%;border:1px solid var(--text3);color:var(--text3);font-size:9.5px;display:inline-flex;align-items:center;justify-content:center;cursor:help;flex-shrink:0}
+.kpi-val{font-family:'Fraunces',serif;font-weight:600;font-size:32px;color:var(--ink);line-height:1;margin-bottom:8px}
+.kpi-d{font-size:12.5px;font-weight:600;display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:100px}
+.d-up{color:var(--emerald);background:var(--emerald-soft)}
+.d-dn{color:var(--rose);background:var(--rose-soft)}
+.d-nt{color:var(--text3);background:#F0EFE9}
+
+/* ---------- CHART CARD ---------- */
+.card{background:var(--card);border:1px solid var(--card-line);border-radius:var(--r);padding:22px 24px}
+.chart-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-bottom:18px}
+.chart-title{font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--ink)}
+.metric-toggle{display:flex;gap:5px;flex-wrap:wrap}
+.mbtn{
+  font-family:'Inter',sans-serif;font-size:12px;font-weight:600;
+  padding:7px 13px;border-radius:100px;border:1px solid var(--card-line);
+  background:#fff;color:var(--text2);cursor:pointer;transition:.15s;
+}
+.mbtn.active{color:#fff}
+.chart-wrap{position:relative;height:320px}
+.chart-note{font-size:11.5px;color:var(--text3);margin-top:10px}
+
+/* ---------- COMPARATIVE ---------- */
+.cmp-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}
+@media(max-width:820px){.cmp-grid{grid-template-columns:1fr}}
+.metric-cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.metric-card-head{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.metric-card-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.metric-card-title{font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--ink)}
+.metric-card-chart{position:relative;height:150px}
+.metric-card-foot{display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;padding-top:10px;border-top:1px solid var(--card-line)}
+.metric-card-latest{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text3)}
+.metric-card-latest b{font-family:'Fraunces',serif;font-size:15px;color:var(--ink);font-weight:600}
+.month-table{width:100%;border-collapse:collapse}
+.month-table th{font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);text-align:left;padding:9px 10px;border-bottom:1.5px solid var(--card-line)}
+.month-table td{font-size:13.5px;padding:11px 10px;border-bottom:1px solid var(--card-line);color:var(--text2)}
+.month-table td:first-child{color:var(--ink);font-weight:600}
+.month-table tr:last-child td{border-bottom:none}
+.tag-up{color:var(--emerald);font-weight:600}
+.tag-dn{color:var(--rose);font-weight:600}
+.tag-nt{color:var(--text3)}
+
+/* ---------- SSI ---------- */
+.ssi-grid{display:grid;grid-template-columns:280px 1fr;gap:24px}
+@media(max-width:760px){.ssi-grid{grid-template-columns:1fr}}
+.ssi-gauge-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 0}
+.ssi-canvas-box{position:relative;width:220px;height:220px}
+.ssi-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ssi-score{font-family:'Fraunces',serif;font-size:46px;font-weight:600;color:var(--ink);line-height:1}
+.ssi-of{font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace}
+.ssi-rank-row{display:flex;gap:10px;margin-top:18px;width:100%}
+.ssi-rank{flex:1;background:var(--paper);border:1px solid var(--card-line);border-radius:var(--r-sm);padding:10px 12px;text-align:center}
+.ssi-rank-lbl{font-size:10.5px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.ssi-rank-val{font-family:'Fraunces',serif;font-size:16px;color:var(--ink);font-weight:600}
+
+.comp-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.comp-lbl{width:200px;flex-shrink:0;font-size:13px;color:var(--text2);font-weight:600}
+.comp-track{flex:1;height:9px;background:#EEECE3;border-radius:6px;overflow:hidden}
+.comp-fill{height:100%;border-radius:6px}
+.comp-val{width:70px;flex-shrink:0;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text2)}
+
+.bench-row{display:flex;gap:10px;margin-top:18px}
+.bench{flex:1;background:var(--paper);border:1px solid var(--card-line);border-radius:var(--r-sm);padding:14px 16px}
+.bench-t{font-size:11.5px;color:var(--text2);margin-bottom:6px}
+.bench-v{font-family:'Fraunces',serif;font-size:22px;color:var(--ink);font-weight:600}
+.bench-d{font-size:11.5px;color:var(--emerald);font-weight:600;margin-top:2px}
+
+/* ---------- POSTS ---------- */
+.posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:900px){.posts-grid{grid-template-columns:1fr}}
+.post-card{background:var(--card);border:1px solid var(--card-line);border-radius:var(--r);padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px}
+.post-rank{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:6px}
+.post-preview{font-family:'Fraunces',serif;font-size:14.5px;color:var(--text);line-height:1.5;font-style:italic;flex:1}
+.post-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.post-tag{font-size:10.5px;padding:3px 9px;border-radius:100px;font-weight:600}
+.tag-foto{background:#EAF1FB;color:#2563a8}
+.tag-texto{background:#F0EFE9;color:var(--text3)}
+.post-imp{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--emerald);font-weight:600}
+.post-empty{grid-column:1/-1;text-align:center;padding:30px;color:var(--text3);font-size:13px;border:1px dashed var(--card-line);border-radius:var(--r)}
+
+/* ---------- INSIGHTS ---------- */
+.ibox{display:flex;flex-direction:column;gap:2px}
+.irow{display:flex;gap:14px;padding:14px 4px;border-bottom:1px solid var(--card-line)}
+.irow:last-child{border-bottom:none}
+.iicon{font-size:17px;flex-shrink:0;width:26px;text-align:center}
+.itext{font-size:13.5px;color:var(--text2);line-height:1.6}
+.itext strong{color:var(--ink)}
+
+/* ---------- GLOSSARY ---------- */
+.gloss-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.gloss-card{background:var(--card);border:1px solid var(--card-line);border-radius:var(--r-sm);padding:14px 16px}
+.gloss-t{font-weight:700;font-size:13px;color:var(--ink);margin-bottom:5px}
+.gloss-d{font-size:12.5px;color:var(--text2);line-height:1.55}
+
+footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--card-line);text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text3)}
+
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 </style>
 </head>
 <body>
+
+<header class="top">
+  <div class="top-inner">
+    <div>
+      <div class="brand">Vértice Services</div>
+      <div class="h-title">Painel de Performance — LinkedIn</div>
+      <div class="h-sub">Rodolfo Basilio · leitura conjunta para toda a equipe</div>
+    </div>
+    <div class="h-meta">Atualizado em 31/07/2026<br>Acompanhamento desde 07/05/2026</div>
+  </div>
+  <div class="periodbar" id="periodbar"></div>
+</header>
+
 <div class="wrap">
 
-<div class="hd">
-  <div>
-    <div class="hd-brand">Vértice Services</div>
-    <div class="hd-title">Relatório de Performance LinkedIn</div>
-    <div class="hd-sub">Rodolfo Basilio · Maio, Junho e Julho 2026</div>
-  </div>
-  <div class="hd-date">Atualizado em 22/07/2026<br>Acompanhamento desde 07/05/2026</div>
-</div>
+  <!-- RESUMO -->
+  <section id="sec-resumo">
+    <div class="eyebrow">Resumo do período selecionado</div>
+    <h2 class="sec-title" id="resumo-title">Julho 2026</h2>
+    <p class="sec-desc">Números fechados do período, comparados com a semana ou mês anterior. Passe o mouse no ícone <span style="font-family:'IBM Plex Mono',monospace">i</span> de cada card para entender o que a métrica significa.</p>
+    <div class="kpi-grid" id="kpi-grid"></div>
+  </section>
 
-<div class="mtabs">
-  <button class="mtab maio active" onclick="showMonth('maio')">📅 Maio 2026</button>
-  <button class="mtab junho" onclick="showMonth('junho')">📅 Junho 2026</button>
-  <button class="mtab julho" onclick="showMonth('julho')">📅 Julho 2026</button>
-</div>
-
-<!-- ========== MAIO ========== -->
-<div id="p-maio" class="mpanel active">
-  <div class="msum">
-    <div class="msum-t">Resumo consolidado — Maio 2026 (4 semanas)</div>
-    <div class="msum-g">
-      <div><div class="msum-v">360</div><div class="msum-l">Impressões finais (7d)</div><div class="msum-d sup">▲ +84,6% vs. sem. 1</div></div>
-      <div><div class="msum-v">1.964</div><div class="msum-l">Seguidores ao final</div><div class="msum-d sup">▲ +74 no mês</div></div>
-      <div><div class="msum-v">200</div><div class="msum-l">Visualizações de perfil</div><div class="msum-d sup">▲ +19% vs. sem. 1</div></div>
-      <div><div class="msum-v">29</div><div class="msum-l">Aparições em busca</div><div class="msum-d sup">▲ +141% vs. sem. 1</div></div>
-      <div><div class="msum-v">52</div><div class="msum-l">SSI ao final</div><div class="msum-d snt">— Estável</div></div>
-      <div><div class="msum-v">Top 4%</div><div class="msum-l">Ranking no setor</div><div class="msum-d sup">▲ Melhorou</div></div>
-    </div>
-  </div>
-
-  <div class="wtabs">
-    <button class="wtab active" onclick="showWM(1)">Sem. 1 — 07/05</button>
-    <button class="wtab" onclick="showWM(2)">Sem. 2 — 13/05</button>
-    <button class="wtab" onclick="showWM(3)">Sem. 3 — 20/05</button>
-    <button class="wtab" onclick="showWM(4)">Sem. 4 — 27/05</button>
-    <button class="wtab" onclick="showWM(5)">Comparativo</button>
-  </div>
-
-  <div id="mw1" class="wpanel active">
-    <div class="slabel">Métricas de alcance</div>
-    <div class="mgrid">
-      <div class="mc"><div class="mc-lbl">Impressões (7 dias)</div><div class="mc-val">195</div><div class="mc-d ddn">▼ 57,8% vs. semana anterior</div></div>
-      <div class="mc"><div class="mc-lbl">Seguidores</div><div class="mc-val">1.890</div><div class="mc-d dup">▲ +1,4% últimos 7 dias</div></div>
-      <div class="mc"><div class="mc-lbl">Visualizações de perfil</div><div class="mc-val">168</div><div class="mc-d dnt">Últimos 90 dias</div></div>
-      <div class="mc"><div class="mc-lbl">Aparições em busca</div><div class="mc-val">12</div><div class="mc-d dnt">Semana de referência</div></div>
-    </div>
-    <div class="slabel">Social Selling Index (SSI)</div>
-    <div class="rrow">
-      <div class="rpill"><div class="rpill-lbl">Ranking no setor</div><div class="rpill-val">Top 5%</div></div>
-      <div class="rpill"><div class="rpill-lbl">Ranking na rede</div><div class="rpill-val">Top 21%</div></div>
-    </div>
-    <div class="sp"></div>
-    <div class="ssic">
-      <div class="ssih">
-        <div class="ssicircle"><div class="ssiscore">52</div><div class="ssisub">de 100</div></div>
-        <div><div class="ssititle">SSI: 52/100</div><div class="ssidesc">Acima da média do setor (31) e da rede (38)</div></div>
+  <!-- EVOLUÇÃO -->
+  <section id="sec-evolucao">
+    <div class="eyebrow">Semana a semana</div>
+    <h2 class="sec-title">Evolução ao longo do tempo</h2>
+    <p class="sec-desc">Cada barra vertical clara marca a virada de um mês. Use os botões para trocar a métrica exibida, ou selecione um mês acima para focar o período.</p>
+    <div class="card">
+      <div class="chart-head">
+        <div class="chart-title">Tendência semanal</div>
+        <div class="metric-toggle" id="metric-toggle"></div>
       </div>
-      <div class="crow"><div class="clbl">Marca profissional</div><div class="cbg"><div class="cfill" style="width:36.8%;background:#378ADD"></div></div><div class="cval">9,2 / 25</div></div>
-      <div class="crow"><div class="clbl">Pessoas certas</div><div class="cbg"><div class="cfill" style="width:26.4%;background:#1D9E75"></div></div><div class="cval">6,6 / 25</div></div>
-      <div class="crow"><div class="clbl">Engajamento com insights</div><div class="cbg"><div class="cfill" style="width:44%;background:#EF9F27"></div></div><div class="cval">11 / 25</div></div>
-      <div class="crow"><div class="clbl">Construção de relacionamentos</div><div class="cbg"><div class="cfill" style="width:100%;background:#D4537E"></div></div><div class="cval">25 / 25</div></div>
+      <div class="chart-wrap"><canvas id="trendChart"></canvas></div>
+      <div class="chart-note" id="trend-note"></div>
     </div>
-    <div class="slabel">Benchmarks</div>
-    <div class="brow">
-      <div class="bc"><div class="bc-t">Média do setor (Financial Services)</div><div class="bc-s">31 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 68% acima da média</div></div>
-      <div class="bc"><div class="bc-t">Média da rede</div><div class="bc-s">38 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 37% acima da média</div></div>
-    </div>
-  </div>
+  </section>
 
-  <div id="mw2" class="wpanel">
-    <div class="slabel">Métricas de alcance</div>
-    <div class="mgrid">
-      <div class="mc"><div class="mc-lbl">Impressões (7 dias)</div><div class="mc-val">143</div><div class="mc-d ddn">▼ 30,6% vs. 7 dias anteriores</div></div>
-      <div class="mc"><div class="mc-lbl">Seguidores</div><div class="mc-val">1.918</div><div class="mc-d dup">▲ +1,8% vs. 7 dias anteriores</div></div>
-      <div class="mc"><div class="mc-lbl">Visualizações de perfil</div><div class="mc-val">171</div><div class="mc-d ddn">▼ 5,6% vs. 7 dias anteriores</div></div>
-      <div class="mc"><div class="mc-lbl">Aparições em busca</div><div class="mc-val">12</div><div class="mc-d dnt">0% vs. semana anterior</div></div>
+  <!-- COMPARATIVO ENTRE MESES -->
+  <section id="sec-comparativo">
+    <div class="eyebrow">Comparativo mensal</div>
+    <h2 class="sec-title">Maio × Junho × Julho</h2>
+    <p class="sec-desc">Cada métrica tem sua própria escala, em um cartão separado — assim seguidores (na casa dos milhares) não distorce a leitura de impressões, visualizações ou buscas (na casa das centenas).</p>
+    <div class="metric-cards-grid" id="metric-cards-grid"></div>
+    <div class="card" style="margin-top:14px">
+      <div class="chart-head"><div class="chart-title">Tabela de fechamento</div></div>
+      <table class="month-table" id="month-table"></table>
     </div>
-    <div class="slabel">Social Selling Index (SSI)</div>
-    <div class="rrow">
-      <div class="rpill"><div class="rpill-lbl">Ranking no setor</div><div class="rpill-val">Top 4% ▲</div></div>
-      <div class="rpill"><div class="rpill-lbl">Ranking na rede</div><div class="rpill-val">Top 21%</div></div>
-    </div>
-    <div class="sp"></div>
-    <div class="ssic">
-      <div class="ssih">
-        <div class="ssicircle"><div class="ssiscore">52</div><div class="ssisub">de 100</div></div>
-        <div><div class="ssititle">SSI: 52/100</div><div class="ssidesc">Ranking no setor melhorou: top 5% → top 4%</div></div>
-      </div>
-      <div class="crow"><div class="clbl">Marca profissional</div><div class="cbg"><div class="cfill" style="width:20.8%;background:#378ADD"></div></div><div class="cval">5,2 / 25</div></div>
-      <div class="crow"><div class="clbl">Pessoas certas</div><div class="cbg"><div class="cfill" style="width:26.4%;background:#1D9E75"></div></div><div class="cval">6,6 / 25</div></div>
-      <div class="crow"><div class="clbl">Engajamento com insights</div><div class="cbg"><div class="cfill" style="width:44%;background:#EF9F27"></div></div><div class="cval">11 / 25</div></div>
-      <div class="crow"><div class="clbl">Construção de relacionamentos</div><div class="cbg"><div class="cfill" style="width:92%;background:#D4537E"></div></div><div class="cval">23 / 25</div></div>
-    </div>
-    <div class="slabel">Benchmarks</div>
-    <div class="brow">
-      <div class="bc"><div class="bc-t">Média do setor (Financial Services)</div><div class="bc-s">31 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 68% acima da média</div></div>
-      <div class="bc"><div class="bc-t">Média da rede</div><div class="bc-s">38 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 37% acima da média</div></div>
-    </div>
-  </div>
+  </section>
 
-  <div id="mw3" class="wpanel">
-    <div class="slabel">Métricas de alcance</div>
-    <div class="mgrid">
-      <div class="mc"><div class="mc-lbl">Impressões (7 dias)</div><div class="mc-val">373</div><div class="mc-d dup">▲ +131,7% vs. 7 dias anteriores</div></div>
-      <div class="mc"><div class="mc-lbl">Seguidores</div><div class="mc-val">1.940</div><div class="mc-d dup">▲ +1,0% vs. 7 dias anteriores</div></div>
-      <div class="mc"><div class="mc-lbl">Visualizações de perfil</div><div class="mc-val">182</div><div class="mc-d ddn">▼ 23,7% vs. 7 dias anteriores</div></div>
-      <div class="mc"><div class="mc-lbl">Aparições em busca</div><div class="mc-val">15</div><div class="mc-d dnt">Mai 12–18 · 0% vs. mai 5–11</div></div>
-    </div>
-    <div class="slabel">Destaque da semana</div>
-    <div class="hlcard"><div class="hlicon">🚀</div><div><div class="hltitle">Impressões saltaram +131,7% em uma semana</div><div class="hldesc">Maior crescimento de alcance do mês — tendência de queda revertida com força</div></div></div>
-    <div class="slabel">Social Selling Index (SSI)</div>
-    <div class="rrow">
-      <div class="rpill"><div class="rpill-lbl">Ranking no setor</div><div class="rpill-val">Top 5%</div></div>
-      <div class="rpill"><div class="rpill-lbl">Ranking na rede</div><div class="rpill-val">Top 21%</div></div>
-    </div>
-    <div class="sp"></div>
-    <div class="ssic">
-      <div class="ssih">
-        <div class="ssicircle"><div class="ssiscore">52</div><div class="ssisub">de 100</div></div>
-        <div><div class="ssititle">SSI: 52/100</div><div class="ssidesc">Score estável — crescimento de impressões ainda não refletido no SSI</div></div>
-      </div>
-      <div class="crow"><div class="clbl">Marca profissional</div><div class="cbg"><div class="cfill" style="width:37%;background:#378ADD"></div></div><div class="cval">9,249/25</div></div>
-      <div class="crow"><div class="clbl">Pessoas certas</div><div class="cbg"><div class="cfill" style="width:26.8%;background:#1D9E75"></div></div><div class="cval">6,7 / 25</div></div>
-      <div class="crow"><div class="clbl">Engajamento com insights</div><div class="cbg"><div class="cfill" style="width:44%;background:#EF9F27"></div></div><div class="cval">11 / 25</div></div>
-      <div class="crow"><div class="clbl">Construção de relacionamentos</div><div class="cbg"><div class="cfill" style="width:100%;background:#D4537E"></div></div><div class="cval">25 / 25</div></div>
-    </div>
-    <div class="slabel">Benchmarks</div>
-    <div class="brow">
-      <div class="bc"><div class="bc-t">Média do setor (Financial Services)</div><div class="bc-s">31 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 68% acima da média</div></div>
-      <div class="bc"><div class="bc-t">Média da rede</div><div class="bc-s">38 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 37% acima da média</div></div>
-    </div>
-  </div>
-
-  <div id="mw4" class="wpanel">
-    <div class="slabel">Métricas de alcance</div>
-    <div class="mgrid">
-      <div class="mc"><div class="mc-lbl">Impressões (7 dias)</div><div class="mc-val">360</div><div class="mc-d ddn">▼ 6,7% vs. 7 dias anteriores</div></div>
-      <div class="mc"><div class="mc-lbl">Seguidores</div><div class="mc-val">1.964</div><div class="mc-d dup">▲ +1,0% vs. 7 dias anteriores</div></div>
-      <div class="mc"><div class="mc-lbl">Visualizações de perfil</div><div class="mc-val">200</div><div class="mc-d ddn">▼ 25,7% vs. 7 dias anteriores</div></div>
-      <div class="mc"><div class="mc-lbl">Aparições em busca</div><div class="mc-val">29</div><div class="mc-d dnt">Mai 19–25 · 0% vs. mai 12–18</div></div>
-    </div>
-    <div class="slabel">Destaque da semana</div>
-    <div class="hlcard"><div class="hlicon">🔍</div><div><div class="hltitle">Aparições em busca: 29 — maior valor do período</div><div class="hldesc">+93% vs. semana 3 (15 → 29) — perfil com forte relevância nos resultados de pesquisa</div></div></div>
-    <div class="slabel">Social Selling Index (SSI)</div>
-    <div class="rrow">
-      <div class="rpill"><div class="rpill-lbl">Ranking no setor</div><div class="rpill-val">Top 4% ▲</div></div>
-      <div class="rpill"><div class="rpill-lbl">Ranking na rede</div><div class="rpill-val">Top 21%</div></div>
-    </div>
-    <div class="sp"></div>
-    <div class="ssic">
-      <div class="ssih">
-        <div class="ssicircle"><div class="ssiscore">52</div><div class="ssisub">de 100</div></div>
-        <div><div class="ssititle">SSI: 52/100</div><div class="ssidesc">Ranking no setor retorna ao top 4%</div></div>
-      </div>
-      <div class="crow"><div class="clbl">Marca profissional</div><div class="cbg"><div class="cfill" style="width:37%;background:#378ADD"></div></div><div class="cval">9,249/25</div></div>
-      <div class="crow"><div class="clbl">Pessoas certas</div><div class="cbg"><div class="cfill" style="width:28%;background:#1D9E75"></div></div><div class="cval">7 / 25</div></div>
-      <div class="crow"><div class="clbl">Engajamento com insights</div><div class="cbg"><div class="cfill" style="width:44%;background:#EF9F27"></div></div><div class="cval">11 / 25</div></div>
-      <div class="crow"><div class="clbl">Construção de relacionamentos</div><div class="cbg"><div class="cfill" style="width:100%;background:#D4537E"></div></div><div class="cval">25 / 25</div></div>
-    </div>
-    <div class="slabel">Benchmarks</div>
-    <div class="brow">
-      <div class="bc"><div class="bc-t">Média do setor (Financial Services)</div><div class="bc-s">31 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 68% acima da média</div></div>
-      <div class="bc"><div class="bc-t">Média da rede</div><div class="bc-s">38 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 37% acima da média</div></div>
-    </div>
-  </div>
-
-  <div id="mw5" class="wpanel">
-    <div class="slabel">Evolução das 4 semanas — Maio 2026</div>
-    <div class="legrow">
-      <div class="legitem"><div class="legdot" style="background:#378ADD"></div>Sem. 1 — 07/05</div>
-      <div class="legitem"><div class="legdot" style="background:#1D9E75"></div>Sem. 2 — 13/05</div>
-      <div class="legitem"><div class="legdot" style="background:#E8A838"></div>Sem. 3 — 20/05</div>
-      <div class="legitem"><div class="legdot" style="background:#D4537E"></div>Sem. 4 — 27/05</div>
-    </div>
-    <div class="cbrow"><div class="cblbl">Impressões (7d)</div><div class="cbars"><div class="cbar" style="width:54%;background:#378ADD"></div><div class="cbar" style="width:39.7%;background:#1D9E75"></div><div class="cbar" style="width:100%;background:#E8A838"></div><div class="cbar" style="width:96.5%;background:#D4537E"></div></div><div class="cvals"><div class="cval2">195</div><div class="cval2">143</div><div class="cval2">373</div><div class="cval2">360</div></div></div>
-    <div class="cbrow"><div class="cblbl">Seguidores</div><div class="cbars"><div class="cbar" style="width:96.2%;background:#378ADD"></div><div class="cbar" style="width:97.7%;background:#1D9E75"></div><div class="cbar" style="width:98.8%;background:#E8A838"></div><div class="cbar" style="width:100%;background:#D4537E"></div></div><div class="cvals"><div class="cval2">1.890</div><div class="cval2">1.918</div><div class="cval2">1.940</div><div class="cval2">1.964</div></div></div>
-    <div class="cbrow"><div class="cblbl">Visualizações perfil</div><div class="cbars"><div class="cbar" style="width:84%;background:#378ADD"></div><div class="cbar" style="width:85.5%;background:#1D9E75"></div><div class="cbar" style="width:91%;background:#E8A838"></div><div class="cbar" style="width:100%;background:#D4537E"></div></div><div class="cvals"><div class="cval2">168</div><div class="cval2">171</div><div class="cval2">182</div><div class="cval2">200</div></div></div>
-    <div class="cbrow"><div class="cblbl">Aparições em busca</div><div class="cbars"><div class="cbar" style="width:41.4%;background:#378ADD"></div><div class="cbar" style="width:41.4%;background:#1D9E75"></div><div class="cbar" style="width:51.7%;background:#E8A838"></div><div class="cbar" style="width:100%;background:#D4537E"></div></div><div class="cvals"><div class="cval2">12</div><div class="cval2">12</div><div class="cval2">15</div><div class="cval2">29</div></div></div>
-    <div class="cbrow"><div class="cblbl">SSI score</div><div class="cbars"><div class="cbar" style="width:100%;background:#378ADD"></div><div class="cbar" style="width:100%;background:#1D9E75"></div><div class="cbar" style="width:100%;background:#E8A838"></div><div class="cbar" style="width:100%;background:#D4537E"></div></div><div class="cvals"><div class="cval2">52</div><div class="cval2">52</div><div class="cval2">52</div><div class="cval2">52</div></div></div>
-    <div class="slabel">Tabela de evolução — Maio</div>
-    <table class="ttable">
-      <thead><tr><th>Métrica</th><th>Sem.1 — 07/05</th><th>Sem.2 — 13/05</th><th>Sem.3 — 20/05</th><th>Sem.4 — 27/05</th><th>Variação total</th></tr></thead>
-      <tbody>
-        <tr><td>Impressões (7d)</td><td>195</td><td>143</td><td>373</td><td>360</td><td class="tup">▲ +84,6%</td></tr>
-        <tr><td>Seguidores</td><td>1.890</td><td>1.918</td><td>1.940</td><td>1.964</td><td class="tup">▲ +74 seguidores</td></tr>
-        <tr><td>Visualizações perfil</td><td>168</td><td>171</td><td>182</td><td>200</td><td class="tup">▲ +19,0%</td></tr>
-        <tr><td>Aparições em busca</td><td>12</td><td>12</td><td>15</td><td>29</td><td class="tup">▲ +141,7%</td></tr>
-        <tr><td>SSI score</td><td>52</td><td>52</td><td>52</td><td>52</td><td class="tnt">— Estável</td></tr>
-        <tr><td>Ranking no setor</td><td>Top 5%</td><td>Top 4%</td><td>Top 5%</td><td>Top 4%</td><td class="tup">▲ Melhorou</td></tr>
-        <tr><td>Ranking na rede</td><td>Top 21%</td><td>Top 21%</td><td>Top 21%</td><td>Top 21%</td><td class="tnt">— Estável</td></tr>
-      </tbody>
-    </table>
-    <div class="slabel">Análise do mês de Maio</div>
-    <div class="ibox">
-      <div class="iitem"><div class="iicon">🔍</div><div class="itext"><strong>Aparições em busca triplicaram no mês:</strong> de 12 para 29 (+141,7%) — maior avanço de toda a base. Relevância orgânica crescente no LinkedIn.</div></div>
-      <div class="iitem"><div class="iicon">👥</div><div class="itext"><strong>+74 seguidores em 4 semanas:</strong> crescimento sem nenhuma semana negativa. Base encerrou Maio em 1.964.</div></div>
-      <div class="iitem"><div class="iicon">📊</div><div class="itext"><strong>Impressões encerraram 84,6% acima da semana 1:</strong> apesar da volatilidade, o patamar consolidado é muito superior ao início.</div></div>
-      <div class="iitem"><div class="iicon">⚡</div><div class="itext"><strong>SSI estável em 52 — oportunidade:</strong> "Engajamento com insights" (11/25) é o componente mais fraco. Comentários estratégicos no setor são a alavanca principal.</div></div>
-      <div class="iitem"><div class="iicon">🎯</div><div class="itext"><strong>Objetivo para Junho:</strong> consolidar impressões acima de 300/sem., crescer newsletter e iniciar subida do SSI via maior engajamento com insights.</div></div>
-    </div>
-    <div class="slabel">Top posts — Mai 2 a Mai 29, 2026</div>
-    <div class="foto-insight">
-      <div class="foto-insight-icon">📸</div>
-      <div>
-        <div class="foto-insight-title">Posts com foto dominam as impressões</div>
-        <div class="foto-insight-desc">Os 2 posts de maior alcance foram publicados com imagem. O conteúdo visual gerou <strong>226 e 203 impressões</strong> respectivamente, contra <strong>149</strong> do melhor post apenas-texto do período — uma diferença de até <strong>52% a mais de alcance</strong>. Fotos impulsionam a distribuição orgânica no LinkedIn.</div>
-      </div>
-    </div>
-    <div class="sp"></div>
-    <div class="tpost">
-      <div class="tpost-rank"><span>🥇</span>#1</div>
-      <div class="tpost-body">
-        <div class="tpost-preview"><a href="https://www.linkedin.com/feed/update/urn:li:activity:7460938143861731328/?updateEntityUrn=urn%3Ali%3Afs_updateV2%3A%28urn%3Ali%3Aactivity%3A7460938143861731328%2CFEED_DETAIL%2CEMPTY%2CDEFAULT%2Cfalse%29" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,.2)">"Já cresci rápido demais e perdi o controle. Já ajustei margem sob pressão. Já reestruturei negócio para sobreviver…"</a></div>
-        <div class="tpost-meta">
-          <span class="tpost-tag tag-foto">📷 Com foto</span>
-          <span class="tpost-eng">1 comentário · 1 repost · 5 reações</span>
-          <span class="tpost-imp">▲ 226 impressões</span>
+  <!-- SSI -->
+  <section id="sec-ssi">
+    <div class="eyebrow">Autoridade no LinkedIn</div>
+    <h2 class="sec-title">Social Selling Index (SSI)</h2>
+    <p class="sec-desc">O SSI é a nota que o próprio LinkedIn dá para o quanto um perfil constrói relacionamento e influência na rede, de 0 a 100. Abaixo, os 4 fatores que compõem essa nota no período selecionado.</p>
+    <div class="card">
+      <div class="ssi-grid">
+        <div class="ssi-gauge-wrap">
+          <div class="ssi-canvas-box">
+            <canvas id="ssiGauge"></canvas>
+            <div class="ssi-center"><div class="ssi-score" id="ssi-score-val">53</div><div class="ssi-of">de 100</div></div>
+          </div>
+          <div class="ssi-rank-row">
+            <div class="ssi-rank"><div class="ssi-rank-lbl">Ranking no setor</div><div class="ssi-rank-val" id="ssi-sector">—</div></div>
+            <div class="ssi-rank"><div class="ssi-rank-lbl">Ranking na rede</div><div class="ssi-rank-val" id="ssi-network">—</div></div>
+          </div>
+        </div>
+        <div>
+          <div id="ssi-components"></div>
+          <div class="bench-row">
+            <div class="bench"><div class="bench-t">Média do setor (Financial Services)</div><div class="bench-v">31 <span style="font-size:13px;color:var(--text3)">/100</span></div><div class="bench-d" id="bench-sector">—</div></div>
+            <div class="bench"><div class="bench-t">Média da rede (todos os setores)</div><div class="bench-v" id="bench-network-val">—</div><div class="bench-d" id="bench-network">—</div></div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="tpost">
-      <div class="tpost-rank"><span>🥈</span>#2</div>
-      <div class="tpost-body">
-        <div class="tpost-preview"><a href="https://www.linkedin.com/feed/update/urn:li:activity:7455300710037958657/?updateEntityUrn=urn%3Ali%3Afs_updateV2%3A%28urn%3Ali%3Aactivity%3A7455300710037958657%2CFEED_DETAIL%2CEMPTY%2CDEFAULT%2Cfalse%29" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,.2)">"Gravando mais um episódio. Existe uma diferença grande entre falar sobre negócios…"</a></div>
-        <div class="tpost-meta">
-          <span class="tpost-tag tag-foto">📷 Com foto</span>
-          <span class="tpost-eng">3 comentários · 8 reações</span>
-          <span class="tpost-imp">▲ 203 impressões</span>
-        </div>
-      </div>
-    </div>
-    <div class="tpost">
-      <div class="tpost-rank"><span>🥉</span>#3</div>
-      <div class="tpost-body">
-        <div class="tpost-preview"><a href="https://www.linkedin.com/feed/update/urn:li:activity:7461083155127652352/?updateEntityUrn=urn%3Ali%3Afs_updateV2%3A%28urn%3Ali%3Aactivity%3A7461083155127652352%2CFEED_DETAIL%2CEMPTY%2CDEFAULT%2Cfalse%29" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,.2)">"A empresa que só funciona quando o dono está presente não é uma empresa. É um emprego com CNPJ…"</a></div>
-        <div class="tpost-meta">
-          <span class="tpost-tag tag-texto">✍️ Só texto</span>
-          <span class="tpost-imp">▲ 149 impressões</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+  </section>
 
-<!-- ========== JUNHO ========== -->
-<div id="p-junho" class="mpanel">
-  <div class="msum">
-    <div class="msum-t">Resumo consolidado — Junho 2026 (4 semanas)</div>
-    <div class="msum-g">
-      <div><div class="msum-v">326</div><div class="msum-l">Impressões finais (7d)</div><div class="msum-d sdn">▼ −36% vs. sem. 1</div></div>
-      <div><div class="msum-v">2.057</div><div class="msum-l">Seguidores ao final</div><div class="msum-d sup">▲ +75 no mês</div></div>
-      <div><div class="msum-v">268</div><div class="msum-l">Visualizações de perfil</div><div class="msum-d sup">▲ +28,8% vs. sem. 1</div></div>
-      <div><div class="msum-v">10</div><div class="msum-l">Aparições em busca</div><div class="msum-d sdn">▼ −65,5% vs. sem. 1</div></div>
-      <div><div class="msum-v">53</div><div class="msum-l">SSI ao final</div><div class="msum-d sup">▲ +1 no mês</div></div>
-      <div><div class="msum-v">Top 4%</div><div class="msum-l">Ranking no setor</div><div class="msum-d snt">— Estável</div></div>
-    </div>
-  </div>
+  <!-- POSTS -->
+  <section id="sec-posts">
+    <div class="eyebrow">Conteúdo</div>
+    <h2 class="sec-title">Publicações de melhor desempenho</h2>
+    <p class="sec-desc">As publicações que mais geraram impressões no mês selecionado — úteis para entender que tipo de conteúdo funciona melhor.</p>
+    <div class="posts-grid" id="posts-grid"></div>
+  </section>
 
-  <div class="wtabs">
-    <button class="wtab" onclick="showWJ(1)">Sem. 1 — 03/06</button>
-    <button class="wtab" onclick="showWJ(2)">Sem. 2 — 10/06</button>
-    <button class="wtab" onclick="showWJ(3)">Sem. 3 — 17/06</button>
-    <button class="wtab" onclick="showWJ(4)">Sem. 4 — 24/06</button>
-    <button class="wtab active" onclick="showWJ(5)">Comparativo</button>
-  </div>
+  <!-- INSIGHTS -->
+  <section id="sec-insights">
+    <div class="eyebrow">Leitura em linguagem simples</div>
+    <h2 class="sec-title">O que aconteceu e o que fazer a seguir</h2>
+    <p class="sec-desc">Resumo direto para qualquer área da empresa acompanhar sem precisar interpretar números.</p>
+    <div class="card"><div class="ibox" id="insights-box"></div></div>
+  </section>
 
-  <!-- J-S1 -->
-  <div id="jw1" class="wpanel">
-    <div class="slabel">Métricas de alcance</div>
-    <div class="mgrid">
-      <div class="mc"><div class="mc-lbl">Impressões (7 dias)</div><div class="mc-val">213</div><div class="mc-d ddn">▼ 40,8% vs. semana anterior</div></div>
-      <div class="mc"><div class="mc-lbl">Seguidores</div><div class="mc-val">1.982</div><div class="mc-d dup">▲ +1,0% vs. semana anterior</div></div>
-      <div class="mc"><div class="mc-lbl">Visualizações de perfil</div><div class="mc-val">208</div><div class="mc-d dup">▲ Novo recorde histórico</div></div>
-      <div class="mc"><div class="mc-lbl">Aparições em busca</div><div class="mc-val">29</div><div class="mc-d dnt">Mai 19–25 · 0% vs. mai 12–18</div></div>
+  <!-- GLOSSARIO -->
+  <section id="sec-gloss">
+    <div class="eyebrow">Referência rápida</div>
+    <h2 class="sec-title">O que cada métrica quer dizer</h2>
+    <div class="gloss-grid">
+      <div class="gloss-card"><div class="gloss-t">Impressões</div><div class="gloss-d">Quantas vezes as publicações apareceram na tela de alguém, na última semana. Mede alcance, não engajamento.</div></div>
+      <div class="gloss-card"><div class="gloss-t">Visualizações de perfil</div><div class="gloss-d">Quantas pessoas clicaram para ver o perfil completo. Indica interesse genuíno, além do feed.</div></div>
+      <div class="gloss-card"><div class="gloss-t">Aparições em busca</div><div class="gloss-d">Quantas vezes o perfil apareceu quando alguém pesquisou por um nome ou termo relacionado no LinkedIn.</div></div>
+      <div class="gloss-card"><div class="gloss-t">SSI (Social Selling Index)</div><div class="gloss-d">Nota do próprio LinkedIn (0–100) para a força do perfil em construir marca, encontrar as pessoas certas, gerar insights e relacionamentos.</div></div>
+      <div class="gloss-card"><div class="gloss-t">Ranking no setor / na rede</div><div class="gloss-d">Posição comparada a outros profissionais do mesmo setor (Financial Services) ou de toda a rede de contatos.</div></div>
+      <div class="gloss-card"><div class="gloss-t">Newsletter</div><div class="gloss-d">Visualizações e novos assinantes do boletim publicado no LinkedIn — canal ainda em fase inicial de rastreamento.</div></div>
     </div>
-    <div class="slabel">Newsletter — nova métrica</div>
-    <div class="nrow">
-      <div class="nc"><div class="nc-l">Visualizações de artigo (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. 7 dias anteriores</div></div>
-      <div class="nc"><div class="nc-l">Novos assinantes (7d)</div><div class="nc-v">1</div><div class="nc-d dnt">Rastreamento iniciado esta semana</div></div>
-    </div>
-    <div class="slabel">Destaque da semana</div>
-    <div class="hlcard info"><div class="hlicon">📬</div><div><div class="hltitle">Newsletter começa a ser rastreada — 1º assinante captado</div><div class="hldesc">Nova dimensão de alcance incorporada ao relatório a partir de Junho</div></div></div>
-    <div class="slabel">Social Selling Index (SSI)</div>
-    <div class="rrow">
-      <div class="rpill"><div class="rpill-lbl">Ranking no setor</div><div class="rpill-val">Top 4%</div></div>
-      <div class="rpill"><div class="rpill-lbl">Ranking na rede</div><div class="rpill-val">Top 20% ▲</div></div>
-    </div>
-    <div class="sp"></div>
-    <div class="ssic">
-      <div class="ssih">
-        <div class="ssicircle"><div class="ssiscore">52</div><div class="ssisub">de 100</div></div>
-        <div><div class="ssititle">SSI: 52/100</div><div class="ssidesc">Ranking na rede melhorou: Top 21% → Top 20% ▲</div></div>
-      </div>
-      <div class="crow"><div class="clbl">Marca profissional</div><div class="cbg"><div class="cfill" style="width:37%;background:#378ADD"></div></div><div class="cval">9,249/25</div></div>
-      <div class="crow"><div class="clbl">Pessoas certas</div><div class="cbg"><div class="cfill" style="width:28%;background:#1D9E75"></div></div><div class="cval">7 / 25</div></div>
-      <div class="crow"><div class="clbl">Engajamento com insights</div><div class="cbg"><div class="cfill" style="width:44%;background:#EF9F27"></div></div><div class="cval">11 / 25</div></div>
-      <div class="crow"><div class="clbl">Construção de relacionamentos</div><div class="cbg"><div class="cfill" style="width:100%;background:#D4537E"></div></div><div class="cval">25 / 25</div></div>
-    </div>
-    <div class="slabel">Benchmarks</div>
-    <div class="brow">
-      <div class="bc"><div class="bc-t">Média do setor (Financial Services)</div><div class="bc-s">31 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 68% acima da média</div></div>
-      <div class="bc"><div class="bc-t">Média da rede</div><div class="bc-s">38 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 37% acima da média</div></div>
-    </div>
-    <div class="slabel">Análise da semana</div>
-    <div class="ibox">
-      <div class="iitem"><div class="iicon">📉</div><div class="itext"><strong>Queda de impressões esperada na virada do mês:</strong> recuo de 360 para 213 (−40,8%) é natural após picos. O patamar ainda está acima das semanas 1 e 2 de Maio (195 e 143). Tendência a monitorar na semana 2.</div></div>
-      <div class="iitem"><div class="iicon">👥</div><div class="itext"><strong>+18 seguidores em uma semana:</strong> crescimento firme (1.964 → 1.982). A base está próxima de atingir a marca de 2.000 seguidores.</div></div>
-      <div class="iitem"><div class="iicon">📈</div><div class="itext"><strong>Visualizações de perfil atingem novo recorde:</strong> 208 supera o máximo de Maio (200), indicando interesse elevado no perfil mesmo com menos impressões.</div></div>
-      <div class="iitem"><div class="iicon">🌐</div><div class="itext"><strong>Ranking na rede melhorou para Top 20%:</strong> evolução de Top 21% → Top 20% — confirmação de ganho de posição relativa na rede.</div></div>
-      <div class="iitem"><div class="iicon">🎯</div><div class="itext"><strong>Objetivo da semana 2:</strong> recuperar impressões acima de 300, captar mais assinantes da newsletter e aumentar engajamento com insights para elevar o SSI além de 52.</div></div>
-    </div>
-  </div>
+  </section>
 
-  <!-- J-S2 -->
-  <div id="jw2" class="wpanel">
-    <div class="slabel">Métricas de alcance</div>
-    <div class="mgrid">
-      <div class="mc"><div class="mc-lbl">Impressões (7 dias)</div><div class="mc-val">1.846</div><div class="mc-d dup">▲ +692% vs. semana anterior 🚀</div></div>
-      <div class="mc"><div class="mc-lbl">Seguidores</div><div class="mc-val">2.003</div><div class="mc-d dup">▲ +1,1% vs. semana anterior</div></div>
-      <div class="mc"><div class="mc-lbl">Visualizações de perfil</div><div class="mc-val">234</div><div class="mc-d dup">▲ +33% vs. semana anterior</div></div>
-      <div class="mc"><div class="mc-lbl">Aparições em busca</div><div class="mc-val">22</div><div class="mc-d dnt">Jun 2–8 · 0% vs. Mai 26–Jun 1</div></div>
-    </div>
-    <div class="slabel">Newsletter</div>
-    <div class="nrow">
-      <div class="nc"><div class="nc-l">Visualizações de artigo (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. 7 dias anteriores</div></div>
-      <div class="nc"><div class="nc-l">Novos assinantes (7d)</div><div class="nc-v">0</div><div class="nc-d ddn">▼ −100% vs. semana anterior</div></div>
-    </div>
-    <div class="slabel">Destaque da semana</div>
-    <div class="hlcard"><div class="hlicon">🚀</div><div><div class="hltitle">Marco: 2.000 seguidores atingido!</div><div class="hldesc">Base chegou a 2.003 — crescimento consistente semana a semana desde o início do acompanhamento.</div></div></div>
-    <div class="slabel">Social Selling Index (SSI)</div>
-    <div class="rrow">
-      <div class="rpill"><div class="rpill-lbl">Ranking no setor</div><div class="rpill-val">Top 4%</div></div>
-      <div class="rpill"><div class="rpill-lbl">Ranking na rede</div><div class="rpill-val">Top 21% ▼</div></div>
-    </div>
-    <div class="sp"></div>
-    <div class="ssic">
-      <div class="ssih">
-        <div class="ssicircle"><div class="ssiscore">52</div><div class="ssisub">de 100</div></div>
-        <div><div class="ssititle">SSI: 52/100 — estável</div><div class="ssidesc">Ranking na rede recuou levemente: Top 20% → Top 21% ▼</div></div>
-      </div>
-      <div class="crow"><div class="clbl">Marca profissional</div><div class="cbg"><div class="cfill" style="width:37%;background:#378ADD"></div></div><div class="cval">9,249/25</div></div>
-      <div class="crow"><div class="clbl">Pessoas certas</div><div class="cbg"><div class="cfill" style="width:28%;background:#1D9E75"></div></div><div class="cval">7 / 25</div></div>
-      <div class="crow"><div class="clbl">Engajamento com insights</div><div class="cbg"><div class="cfill" style="width:44%;background:#EF9F27"></div></div><div class="cval">11 / 25</div></div>
-      <div class="crow"><div class="clbl">Construção de relacionamentos</div><div class="cbg"><div class="cfill" style="width:100%;background:#D4537E"></div></div><div class="cval">25 / 25</div></div>
-    </div>
-    <div class="slabel">Benchmarks</div>
-    <div class="brow">
-      <div class="bc"><div class="bc-t">Média do setor (Financial Services)</div><div class="bc-s">31 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 68% acima da média</div></div>
-      <div class="bc"><div class="bc-t">Média da rede</div><div class="bc-s">39 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 33% acima da média</div></div>
-    </div>
-    <div class="slabel">Análise da semana</div>
-    <div class="ibox">
-      <div class="iitem"><div class="iicon">🚀</div><div class="itext"><strong>Impressões disparam +692%:</strong> de 213 para 1.846 — o maior salto semanal registrado. Indica que algum conteúdo ganhou tração orgânica expressiva no período.</div></div>
-      <div class="iitem"><div class="iicon">🎉</div><div class="itext"><strong>2.000 seguidores atingidos:</strong> a base chegou a 2.003, consolidando um marco importante. +21 seguidores em uma única semana.</div></div>
-      <div class="iitem"><div class="iicon">👁️</div><div class="itext"><strong>Visualizações de perfil sobem para 234:</strong> novo recorde, superando os 208 da semana anterior — o aumento de impressões gerou maior interesse pelo perfil.</div></div>
-      <div class="iitem"><div class="iicon">🔍</div><div class="itext"><strong>Aparições em busca recuam para 22:</strong> queda de 29 para 22 — métrica de descoberta orgânica a monitorar nas próximas semanas.</div></div>
-      <div class="iitem"><div class="iicon">🎯</div><div class="itext"><strong>Objetivo da semana 3:</strong> identificar o conteúdo responsável pelo pico de impressões e replicar o padrão, além de trabalhar engajamento com insights para elevar o SSI.</div></div>
-    </div>
-    <div class="slabel">Top posts — Jun 10 a Jun 17, 2026</div>
-    <div class="tpost">
-      <div class="tpost-rank"><span>🥇</span>#1</div>
-      <div class="tpost-body">
-        <div class="tpost-preview"><a href="https://www.linkedin.com/feed/update/urn:li:share:7468157329209872384/" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,.2)">Em 2007, propus trabalhar de graça num escritório de contabilidade em Londres...</a></div>
-        <div class="tpost-meta">
-          <span class="tpost-tag tag-texto">✍️ Só texto</span>
-          <span class="tpost-eng">3 engagements</span>
-          <span class="tpost-imp">▲ 2.000 impressões</span>
-        </div>
-      </div>
-    </div>
-    <div class="tpost">
-      <div class="tpost-rank"><span>🥈</span>#2</div>
-      <div class="tpost-body">
-        <div class="tpost-preview"><a href="https://www.linkedin.com/feed/update/urn:li:share:7468721597076508673/" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,.2)">Todo mês eu tenho a mesma conversa com pelo menos um empresário brasileiro em Londres...</a></div>
-        <div class="tpost-meta">
-          <span class="tpost-tag tag-texto">✍️ Só texto</span>
-          <span class="tpost-eng">0 engagements</span>
-          <span class="tpost-imp">▲ 150 impressões</span>
-        </div>
-      </div>
-    </div>
-    <div class="tpost">
-      <div class="tpost-rank"><span>🥉</span>#3</div>
-      <div class="tpost-body">
-        <div class="tpost-preview"><a href="https://www.linkedin.com/feed/update/urn:li:share:7468157624073687040/" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,.2)">Quando subi no palco do IET Savoy Place para falar sobre crescer em tempos difíceis contei uma coisa que não estava no roteiro...</a></div>
-        <div class="tpost-meta">
-          <span class="tpost-tag tag-foto">📷 Com foto</span>
-          <span class="tpost-eng">4 engagements</span>
-          <span class="tpost-imp">▲ 130 impressões</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- J-S3 -->
-  <div id="jw3" class="wpanel">
-    <div class="slabel">Métricas de alcance</div>
-    <div class="mgrid">
-      <div class="mc"><div class="mc-lbl">Impressões (7 dias)</div><div class="mc-val">341</div><div class="mc-d ddn">▼ −82% vs. semana anterior</div></div>
-      <div class="mc"><div class="mc-lbl">Seguidores</div><div class="mc-val">2.033</div><div class="mc-d dup">▲ +1% vs. semana anterior</div></div>
-      <div class="mc"><div class="mc-lbl">Visualizações de perfil</div><div class="mc-val">250</div><div class="mc-d dup">▲ Novo recorde histórico</div></div>
-      <div class="mc"><div class="mc-lbl">Aparições em busca</div><div class="mc-val">22</div><div class="mc-d dnt">Jun 2–8 · 0% vs. Mai 26–Jun 1</div></div>
-    </div>
-    <div class="slabel">Newsletter</div>
-    <div class="nrow">
-      <div class="nc"><div class="nc-l">Visualizações de artigo (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. 7 dias anteriores</div></div>
-      <div class="nc"><div class="nc-l">Novos assinantes (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. semana anterior</div></div>
-    </div>
-    <div class="slabel">Destaque da semana</div>
-    <div class="hlcard"><div class="hlicon">📈</div><div><div class="hltitle">SSI sobe para 53 — primeiro avanço desde o início do acompanhamento</div><div class="hldesc">Pessoas certas subiu de 7 para 7,438 — componente que estava estagnado começa a se mover. Visualizações de perfil atingem novo recorde: 250.</div></div></div>
-    <div class="slabel">Social Selling Index (SSI)</div>
-    <div class="rrow">
-      <div class="rpill"><div class="rpill-lbl">Ranking no setor</div><div class="rpill-val">Top 4%</div></div>
-      <div class="rpill"><div class="rpill-lbl">Ranking na rede</div><div class="rpill-val">Top 20% ▲</div></div>
-    </div>
-    <div class="sp"></div>
-    <div class="ssic">
-      <div class="ssih">
-        <div class="ssicircle"><div class="ssiscore">53</div><div class="ssisub">de 100</div></div>
-        <div><div class="ssititle">SSI: 53/100 ▲ — novo máximo!</div><div class="ssidesc">Subiu 1 ponto pela primeira vez desde o início do acompanhamento</div></div>
-      </div>
-      <div class="crow"><div class="clbl">Marca profissional</div><div class="cbg"><div class="cfill" style="width:37%;background:#378ADD"></div></div><div class="cval">9,249 / 25</div></div>
-      <div class="crow"><div class="clbl">Pessoas certas</div><div class="cbg"><div class="cfill" style="width:29.75%;background:#1D9E75"></div></div><div class="cval">7,438 / 25</div></div>
-      <div class="crow"><div class="clbl">Engajamento com insights</div><div class="cbg"><div class="cfill" style="width:44%;background:#EF9F27"></div></div><div class="cval">11 / 25</div></div>
-      <div class="crow"><div class="clbl">Construção de relacionamentos</div><div class="cbg"><div class="cfill" style="width:100%;background:#D4537E"></div></div><div class="cval">25 / 25</div></div>
-    </div>
-    <div class="slabel">Benchmarks</div>
-    <div class="brow">
-      <div class="bc"><div class="bc-t">Média do setor (Financial Services)</div><div class="bc-s">31 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 71% acima da média</div></div>
-      <div class="bc"><div class="bc-t">Média da rede</div><div class="bc-s">39 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 36% acima da média</div></div>
-    </div>
-    <div class="slabel">Análise da semana</div>
-    <div class="ibox">
-      <div class="iitem"><div class="iicon">📉</div><div class="itext"><strong>Impressões recuam após pico histórico:</strong> queda de 1.846 para 341 (−82%) é natural após o salto excepcional da semana anterior. O patamar de 341 ainda está acima das semanas 1 e 2 de Junho e acima de todas as semanas de Maio, exceto a sem. 3 e 4.</div></div>
-      <div class="iitem"><div class="iicon">👥</div><div class="itext"><strong>+30 seguidores na semana:</strong> a base chegou a 2.033 — crescimento sólido, mantendo a linha ascendente pós-marco dos 2.000.</div></div>
-      <div class="iitem"><div class="iicon">👁️</div><div class="itext"><strong>Visualizações de perfil atingem novo recorde: 250</strong> — supera os 234 da semana anterior. O interesse pelo perfil cresce de forma independente das variações de impressões.</div></div>
-      <div class="iitem"><div class="iicon">📈</div><div class="itext"><strong>SSI sobe para 53 — primeiro avanço do período:</strong> o ponto de melhora veio de "Pessoas certas" (7 → 7,438). Engajamento com insights (11/25) continua sendo a maior alavanca disponível para seguir subindo.</div></div>
-      <div class="iitem"><div class="iicon">🎯</div><div class="itext"><strong>Objetivo da semana 4:</strong> manter visualizações de perfil acima de 250, continuar aumentando "Pessoas certas" e iniciar movimento no componente "Engajamento com insights" para elevar SSI acima de 53.</div></div>
-    </div>
-    <div class="slabel">Top posts — Jun 9 a Jun 17, 2026</div>
-    <div class="tpost">
-      <div class="tpost-rank"><span>🥇</span>#1</div>
-      <div class="tpost-body">
-        <div class="tpost-preview"><a href="https://www.linkedin.com/feed/update/urn:li:share:7471607498739900416/" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,.2)">Em março, um empresário chegou com uma pergunta simples. "Rodolfo, quando é a hora certa de abrir uma Ltd?"...</a></div>
-        <div class="tpost-meta">
-          <span class="tpost-tag tag-texto">✍️ Só texto</span>
-          <span class="tpost-eng">3 engagements</span>
-          <span class="tpost-imp">▲ 69 impressões</span>
-        </div>
-      </div>
-    </div>
-    <div class="tpost">
-      <div class="tpost-rank"><span>🥈</span>#2</div>
-      <div class="tpost-body">
-        <div class="tpost-preview"><a href="https://www.linkedin.com/feed/update/urn:li:share:7468157329209872384/" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,.2)">Em 2007, propus trabalhar de graça num escritório de contabilidade em Londres...</a></div>
-        <div class="tpost-meta">
-          <span class="tpost-tag tag-texto">✍️ Só texto</span>
-          <span class="tpost-eng">2 engagements</span>
-          <span class="tpost-imp">▲ 58 impressões</span>
-        </div>
-      </div>
-    </div>
-    <div class="tpost">
-      <div class="tpost-rank"><span>🥉</span>#3</div>
-      <div class="tpost-body">
-        <div class="tpost-preview"><a href="https://www.linkedin.com/feed/update/urn:li:share:7468721597076508673/" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,.2)">Todo mês eu tenho a mesma conversa com pelo menos um empresário brasileiro em Londres...</a></div>
-        <div class="tpost-meta">
-          <span class="tpost-tag tag-texto">✍️ Só texto</span>
-          <span class="tpost-eng">0 engagements</span>
-          <span class="tpost-imp">▲ 48 impressões</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- J-S4 -->
-  <div id="jw4" class="wpanel">
-    <div class="slabel">Métricas de alcance</div>
-    <div class="mgrid">
-      <div class="mc"><div class="mc-lbl">Impressões (7 dias)</div><div class="mc-val">326</div><div class="mc-d ddn">▼ −36% vs. semana anterior</div></div>
-      <div class="mc"><div class="mc-lbl">Seguidores</div><div class="mc-val">2.057</div><div class="mc-d dup">▲ +1% vs. semana anterior</div></div>
-      <div class="mc"><div class="mc-lbl">Visualizações de perfil</div><div class="mc-val">268</div><div class="mc-d dup">▲ Novo recorde histórico</div></div>
-      <div class="mc"><div class="mc-lbl">Aparições em busca</div><div class="mc-val">10</div><div class="mc-d ddn">▼ Jun 16–22 · Queda significativa</div></div>
-    </div>
-    <div class="slabel">Newsletter</div>
-    <div class="nrow">
-      <div class="nc"><div class="nc-l">Visualizações de artigo (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. 7 dias anteriores</div></div>
-      <div class="nc"><div class="nc-l">Novos assinantes (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. semana anterior</div></div>
-    </div>
-    <div class="slabel">Destaque da semana</div>
-    <div class="hlcard"><div class="hlicon">📈</div><div><div class="hltitle">Visualizações de perfil atingem novo recorde: 268</div><div class="hldesc">SSI mantém 53, mas "Pessoas certas" avança para 7,813. Aparições em busca caem para 10 — métrica a monitorar.</div></div></div>
-    <div class="slabel">Social Selling Index (SSI)</div>
-    <div class="rrow">
-      <div class="rpill"><div class="rpill-lbl">Ranking no setor</div><div class="rpill-val">Top 4%</div></div>
-      <div class="rpill"><div class="rpill-lbl">Ranking na rede</div><div class="rpill-val">Top 19% ▲</div></div>
-    </div>
-    <div class="sp"></div>
-    <div class="ssic">
-      <div class="ssih">
-        <div class="ssicircle"><div class="ssiscore">53</div><div class="ssisub">de 100</div></div>
-        <div><div class="ssititle">SSI: 53/100 — estável</div><div class="ssidesc">Ranking na rede melhorou: Top 20% → Top 19%</div></div>
-      </div>
-      <div class="crow"><div class="clbl">Marca profissional</div><div class="cbg"><div class="cfill" style="width:37%;background:#378ADD"></div></div><div class="cval">9,249 / 25</div></div>
-      <div class="crow"><div class="clbl">Pessoas certas</div><div class="cbg"><div class="cfill" style="width:31.25%;background:#1D9E75"></div></div><div class="cval">7,813 / 25</div></div>
-      <div class="crow"><div class="clbl">Engajamento com insights</div><div class="cbg"><div class="cfill" style="width:44%;background:#EF9F27"></div></div><div class="cval">11 / 25</div></div>
-      <div class="crow"><div class="clbl">Construção de relacionamentos</div><div class="cbg"><div class="cfill" style="width:100%;background:#D4537E"></div></div><div class="cval">25 / 25</div></div>
-    </div>
-    <div class="slabel">Benchmarks</div>
-    <div class="brow">
-      <div class="bc"><div class="bc-t">Média do setor (Financial Services)</div><div class="bc-s">31 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 71% acima da média</div></div>
-      <div class="bc"><div class="bc-t">Média da rede</div><div class="bc-s">39 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 36% acima da média</div></div>
-    </div>
-    <div class="slabel">Análise da semana</div>
-    <div class="ibox">
-      <div class="iitem"><div class="iicon">📉</div><div class="itext"><strong>Impressões recuam para 326:</strong> queda de 1.846 para 326 (−36%) após o pico histórico da semana 2. O patamar ainda está saudável e acima de muitas semanas anteriores.</div></div>
-      <div class="iitem"><div class="iicon">👥</div><div class="itext"><strong>+24 seguidores na semana:</strong> a base chegou a 2.057 — crescimento contínuo. Total de +75 seguidores desde o início de Junho.</div></div>
-      <div class="iitem"><div class="iicon">👁️</div><div class="itext"><strong>Visualizações de perfil atingem novo recorde: 268</strong> — supera o patamar anterior de 250. O interesse genuíno pelo perfil mantém crescimento consistente independentemente das variações de impressões.</div></div>
-      <div class="iitem"><div class="iicon">📈</div><div class="itext"><strong>"Pessoas certas" avança para 7,813:</strong> melhora contínua do componente SSI. SSI mantém 53/100. Ranking na rede melhorou: Top 20% → Top 19%.</div></div>
-      <div class="iitem"><div class="iicon">⚠️</div><div class="itext"><strong>Aparições em busca caem para 10:</strong> queda significativa (22 → 10). Métrica de descoberta orgânica a monitorar com atenção nas próximas semanas.</div></div>
-      <div class="iitem"><div class="iicon">🎯</div><div class="itext"><strong>Objetivo da semana 5/Julho:</strong> recuperar aparições em busca, manter visualizações de perfil acima de 260, consolidar crescimento de seguidores e elevar "Engajamento com insights" para que SSI ultrapasse 54.</div></div>
-    </div>
-    <div class="slabel">Top posts — Jun 17 a Jun 24, 2026</div>
-    <div class="tpost">
-      <div class="tpost-rank"><span>🥇</span>#1</div>
-      <div class="tpost-body">
-        <div class="tpost-preview"><a href="https://www.linkedin.com/feed/update/urn:li:share:7474491447090765824/" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,.2)">Dois sócios. Empresa de consultoria. Em Londres. Os dois retiravam £3.000 por mês como diretores e distribuíam dividendos...</a></div>
-        <div class="tpost-meta">
-          <span class="tpost-tag tag-texto">✍️ Só texto</span>
-          <span class="tpost-eng">2 engagements</span>
-          <span class="tpost-imp">▲ 110 impressões</span>
-        </div>
-      </div>
-    </div>
-    <div class="tpost">
-      <div class="tpost-rank"><span>🥈</span>#2</div>
-      <div class="tpost-body">
-        <div class="tpost-preview"><a href="https://www.linkedin.com/feed/update/urn:li:share:7474854100426489856/" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,.2)">Em março, um cliente me ligou com uma situação que eu já vi mais de uma vez...</a></div>
-        <div class="tpost-meta">
-          <span class="tpost-tag tag-texto">✍️ Só texto</span>
-          <span class="tpost-eng">0 engagements</span>
-          <span class="tpost-imp">▲ 55 impressões</span>
-        </div>
-      </div>
-    </div>
-    <div class="tpost">
-      <div class="tpost-rank"><span>🥉</span>#3</div>
-      <div class="tpost-body">
-        <div class="tpost-preview"><a href="https://www.linkedin.com/feed/update/urn:li:share:7474200841441386497/" target="_blank" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,.2)">Eu já vi empresários escolherem Ltd porque todo mundo usa Ltd. Sem perguntar se era o que fazia sentido para o modelo de negócio deles...</a></div>
-        <div class="tpost-meta">
-          <span class="tpost-tag tag-texto">✍️ Só texto</span>
-          <span class="tpost-eng">1 engagement</span>
-          <span class="tpost-imp">▲ 49 impressões</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- J-COMPARATIVO -->
-  <div id="jw5" class="wpanel active">
-    <div class="slabel">Evolução das 4 semanas — Junho 2026</div>
-    <div class="legrow">
-      <div class="legitem"><div class="legdot" style="background:#7B5EA7"></div>Sem. 1 — 03/06</div>
-      <div class="legitem"><div class="legdot" style="background:#1D9E75"></div>Sem. 2 — 10/06</div>
-      <div class="legitem"><div class="legdot" style="background:#378ADD"></div>Sem. 3 — 17/06</div>
-      <div class="legitem"><div class="legdot" style="background:#D4537E"></div>Sem. 4 — 24/06</div>
-    </div>
-    <div class="cbrow"><div class="cblbl">Impressões (7d)</div><div class="cbars"><div class="cbar" style="width:11.5%;background:#7B5EA7"></div><div class="cbar" style="width:100%;background:#1D9E75"></div><div class="cbar" style="width:18.5%;background:#378ADD"></div><div class="cbar" style="width:17.7%;background:#D4537E"></div></div><div class="cvals"><div class="cval2">213</div><div class="cval2">1.846</div><div class="cval2">341</div><div class="cval2">326</div></div></div>
-    <div class="cbrow"><div class="cblbl">Seguidores</div><div class="cbars"><div class="cbar" style="width:96.4%;background:#7B5EA7"></div><div class="cbar" style="width:97.5%;background:#1D9E75"></div><div class="cbar" style="width:99%;background:#378ADD"></div><div class="cbar" style="width:100%;background:#D4537E"></div></div><div class="cvals"><div class="cval2">1.982</div><div class="cval2">2.003</div><div class="cval2">2.033</div><div class="cval2">2.057</div></div></div>
-    <div class="cbrow"><div class="cblbl">Visualizações perfil</div><div class="cbars"><div class="cbar" style="width:77.6%;background:#7B5EA7"></div><div class="cbar" style="width:87.3%;background:#1D9E75"></div><div class="cbar" style="width:93.3%;background:#378ADD"></div><div class="cbar" style="width:100%;background:#D4537E"></div></div><div class="cvals"><div class="cval2">208</div><div class="cval2">234</div><div class="cval2">250</div><div class="cval2">268</div></div></div>
-    <div class="cbrow"><div class="cblbl">Aparições em busca</div><div class="cbars"><div class="cbar" style="width:100%;background:#7B5EA7"></div><div class="cbar" style="width:75.9%;background:#1D9E75"></div><div class="cbar" style="width:75.9%;background:#378ADD"></div><div class="cbar" style="width:34.5%;background:#D4537E"></div></div><div class="cvals"><div class="cval2">29</div><div class="cval2">22</div><div class="cval2">22</div><div class="cval2">10</div></div></div>
-    <div class="cbrow"><div class="cblbl">SSI score</div><div class="cbars"><div class="cbar" style="width:98.1%;background:#7B5EA7"></div><div class="cbar" style="width:98.1%;background:#1D9E75"></div><div class="cbar" style="width:100%;background:#378ADD"></div><div class="cbar" style="width:100%;background:#D4537E"></div></div><div class="cvals"><div class="cval2">52</div><div class="cval2">52</div><div class="cval2">53</div><div class="cval2">53</div></div></div>
-    <div class="slabel">Tabela de evolução — Junho</div>
-    <table class="ttable">
-      <thead><tr><th>Métrica</th><th>Sem.1 — 03/06</th><th>Sem.2 — 10/06</th><th>Sem.3 — 17/06</th><th>Sem.4 — 24/06</th><th>Variação total</th></tr></thead>
-      <tbody>
-        <tr><td>Impressões (7d)</td><td>213</td><td>1.846</td><td>341</td><td>326</td><td class="tup">▲ +53,1%</td></tr>
-        <tr><td>Seguidores</td><td>1.982</td><td>2.003</td><td>2.033</td><td>2.057</td><td class="tup">▲ +75 seguidores</td></tr>
-        <tr><td>Visualizações perfil</td><td>208</td><td>234</td><td>250</td><td>268</td><td class="tup">▲ +28,8%</td></tr>
-        <tr><td>Aparições em busca</td><td>29</td><td>22</td><td>22</td><td>10</td><td class="tdn">▼ −65,5%</td></tr>
-        <tr><td>SSI score</td><td>52</td><td>52</td><td>53</td><td>53</td><td class="tup">▲ +1 ponto</td></tr>
-        <tr><td>Ranking no setor</td><td>Top 4%</td><td>Top 4%</td><td>Top 4%</td><td>Top 4%</td><td class="tnt">— Estável</td></tr>
-        <tr><td>Ranking na rede</td><td>Top 20%</td><td>Top 21%</td><td>Top 20%</td><td>Top 19%</td><td class="tup">▲ Melhorou</td></tr>
-      </tbody>
-    </table>
-    <div class="slabel">Análise do mês de Junho</div>
-    <div class="ibox">
-      <div class="iitem"><div class="iicon">🚀</div><div class="itext"><strong>Semana 2 foi histórica:</strong> 1.846 impressões (o pico do período) — crescimento de +692% vs. semana anterior. Conteúdo encontrou tração orgânica expressiva.</div></div>
-      <div class="iitem"><div class="iicon">👥</div><div class="itext"><strong>+75 seguidores em 4 semanas:</strong> base cresceu de 1.982 para 2.057. Marco dos 2.000 atingido na semana 2, consolidando força do crescimento.</div></div>
-      <div class="iitem"><div class="iicon">👁️</div><div class="itext"><strong>Visualizações de perfil em alta constante:</strong> crescimento linear (208 → 234 → 250 → 268), novo recorde de 268. Interesse genuíno no perfil cresce semana a semana.</div></div>
-      <div class="iitem"><div class="iicon">📈</div><div class="itext"><strong>SSI subiu para 53 e mantém:</strong> avanço na semana 3, consolidado na semana 4. "Pessoas certas" avançou continuamente (7 → 7,438 → 7,813), sinalizando melhora consistente no targeting de audiência.</div></div>
-      <div class="iitem"><div class="iicon">⚠️</div><div class="itext"><strong>Aparições em busca em queda:</strong> recuo de 29 (sem. 1) para 10 (sem. 4) — uma redução de 65,5%. Métrica de descoberta orgânica a priorizar nas próximas semanas.</div></div>
-      <div class="iitem"><div class="iicon">🎯</div><div class="itext"><strong>Objetivo para Julho:</strong> recuperar aparições em busca, consolidar base acima de 2.100 seguidores, manter visualizações de perfil em crescimento e elevar "Engajamento com insights" (11/25) para elevar SSI acima de 54.</div></div>
-    </div>
-  </div>
-
-</div>
-
-
-<!-- ========== JULHO ========== -->
-<div id="p-julho" class="mpanel">
-  <div class="msum">
-    <div class="msum-t">Resumo consolidado — Julho 2026 (4 semanas)</div>
-    <div class="msum-g">
-      <div><div class="msum-v">216</div><div class="msum-l">Impressões finais (7d)</div><div class="msum-d ddn">▼ 44% vs. sem. anterior</div></div>
-      <div><div class="msum-v">2.165</div><div class="msum-l">Seguidores ao final</div><div class="msum-d sup">▲ +71 vs. Junho</div></div>
-      <div><div class="msum-v">316</div><div class="msum-l">Visualizações de perfil</div><div class="msum-d dup">▲ 37% vs. 7d ant.</div></div>
-      <div><div class="msum-v">18</div><div class="msum-l">Aparições em busca</div><div class="msum-d ddn">▼ 31% vs. sem. anterior</div></div>
-      <div><div class="msum-v">53</div><div class="msum-l">SSI ao final</div><div class="msum-d snt">— Estável</div></div>
-      <div><div class="msum-v">Top 4%</div><div class="msum-l">Ranking no setor</div><div class="msum-d snt">— Estável</div></div>
-    </div>
-  </div>
-
-  <div class="wtabs">
-    <button class="wtab active" onclick="showWJulio(1)">Sem. 1 — 01/07</button>
-    <button class="wtab" onclick="showWJulio(2)">Sem. 2 — 08/07</button>
-    <button class="wtab" onclick="showWJulio(3)">Sem. 3 — 15/07</button>
-    <button class="wtab" onclick="showWJulio(4)">Sem. 4 — 22/07</button>
-  </div>
-
-  <!-- J-S1 -->
-  <div id="jjw1" class="wpanel active">
-    <div class="slabel">Métricas de alcance</div>
-    <div class="mgrid">
-      <div class="mc"><div class="mc-lbl">Impressões (7 dias)</div><div class="mc-val">255</div><div class="mc-d ddn">▼ 42% vs. 7 dias anteriores</div></div>
-      <div class="mc"><div class="mc-lbl">Seguidores</div><div class="mc-val">2.078</div><div class="mc-d dup">▲ +1% vs. 7 dias anteriores</div></div>
-      <div class="mc"><div class="mc-lbl">Visualizações de perfil</div><div class="mc-val">273</div><div class="mc-d ddn">▼ 2% vs. 7 dias anteriores</div></div>
-      <div class="mc"><div class="mc-lbl">Aparições em busca</div><div class="mc-val">10</div><div class="mc-d dnt">Jun 16–22 · 0% vs. Jun 9–15</div></div>
-    </div>
-    <div class="slabel">Newsletter</div>
-    <div class="nrow">
-      <div class="nc"><div class="nc-l">Visualizações de artigo (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. 7 dias anteriores</div></div>
-      <div class="nc"><div class="nc-l">Novos assinantes (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. semana anterior</div></div>
-    </div>
-    <div class="slabel">Destaque da semana</div>
-    <div class="hlcard"><div class="hlicon">👥</div><div><div class="hltitle">Seguidores ultrapassam 2.078 — crescimento contínuo</div><div class="hldesc">Impressões recuam na virada do mês (padrão esperado), mas base segue em trajetória ascendente desde maio.</div></div></div>
-    <div class="slabel">Social Selling Index (SSI)</div>
-    <div class="rrow">
-      <div class="rpill"><div class="rpill-lbl">Ranking no setor</div><div class="rpill-val">Top 3% ▲</div></div>
-      <div class="rpill"><div class="rpill-lbl">Ranking na rede</div><div class="rpill-val">Top 18% ▲</div></div>
-    </div>
-    <div class="sp"></div>
-    <div class="ssic">
-      <div class="ssih">
-        <div class="ssicircle"><div class="ssiscore">53</div><div class="ssisub">de 100</div></div>
-        <div><div class="ssititle">SSI: 53/100 — estável</div><div class="ssidesc">Ranking no setor melhorou: Top 4% → Top 3%</div></div>
-      </div>
-      <div class="crow"><div class="clbl">Marca profissional</div><div class="cbg"><div class="cfill" style="width:37%;background:#378ADD"></div></div><div class="cval">9,249 / 25</div></div>
-      <div class="crow"><div class="clbl">Pessoas certas</div><div class="cbg"><div class="cfill" style="width:32.25%;background:#1D9E75"></div></div><div class="cval">8,063 / 25</div></div>
-      <div class="crow"><div class="clbl">Engajamento com insights</div><div class="cbg"><div class="cfill" style="width:44%;background:#EF9F27"></div></div><div class="cval">11 / 25</div></div>
-      <div class="crow"><div class="clbl">Construção de relacionamentos</div><div class="cbg"><div class="cfill" style="width:100%;background:#D4537E"></div></div><div class="cval">25 / 25</div></div>
-    </div>
-    <div class="slabel">Benchmarks</div>
-    <div class="brow">
-      <div class="bc"><div class="bc-t">Média do setor (Financial Services)</div><div class="bc-s">31 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 71% acima da média</div></div>
-      <div class="bc"><div class="bc-t">Média da rede</div><div class="bc-s">39 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 36% acima da média</div></div>
-    </div>
-    <div class="slabel">Análise da semana</div>
-    <div class="ibox">
-      <div class="iitem"><div class="iicon">📉</div><div class="itext"><strong>Impressões recuam para 255:</strong> queda de 42% na virada do mês, padrão já observado em transições de mês.</div></div>
-      <div class="iitem"><div class="iicon">👥</div><div class="itext"><strong>+21 seguidores na semana:</strong> base chegou a 2.078, mantendo ritmo consistente desde maio.</div></div>
-      <div class="iitem"><div class="iicon">🔍</div><div class="itext"><strong>Aparições em busca em 10:</strong> métrica ainda em nível baixo, prioritária para recuperação.</div></div>
-      <div class="iitem"><div class="iicon">📊</div><div class="itext"><strong>SSI estável em 53/100:</strong> "Engajamento com insights" (11/25) permanece como maior potencial de ganho.</div></div>
-      <div class="iitem"><div class="iicon">🎯</div><div class="itext"><strong>Objetivo da semana 2:</strong> recuperar impressões acima de 300 e aumentar visibilidade em buscas via engajamento estratégico.</div></div>
-    </div>
-  </div>
-
-  <!-- JUL-S2 -->
-  <div id="jjw2" class="wpanel">
-    <div class="slabel">Métricas de alcance</div>
-    <div class="mgrid">
-      <div class="mc"><div class="mc-lbl">Impressões (7 dias)</div><div class="mc-val">466</div><div class="mc-d dup">▲ +73% vs. semana anterior</div></div>
-      <div class="mc"><div class="mc-lbl">Seguidores</div><div class="mc-val">2.108</div><div class="mc-d dup">▲ +1% vs. semana anterior</div></div>
-      <div class="mc"><div class="mc-lbl">Visualizações de perfil</div><div class="mc-val">287</div><div class="mc-d dup">▲ +22% vs. semana anterior</div></div>
-      <div class="mc"><div class="mc-lbl">Aparições em busca</div><div class="mc-val">26</div><div class="mc-d dup">▲ Jun 30–Jul 6 · +160% vs. últ. sem.</div></div>
-    </div>
-    <div class="slabel">Newsletter</div>
-    <div class="nrow">
-      <div class="nc"><div class="nc-l">Visualizações de artigo (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. 7 dias anteriores</div></div>
-      <div class="nc"><div class="nc-l">Novos assinantes (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. semana anterior</div></div>
-    </div>
-    <div class="slabel">Destaque da semana</div>
-    <div class="hlcard"><div class="hlicon">🚀</div><div><div class="hltitle">Recuperação em força: Aparições em busca explodem para 26 (+160%)</div><div class="hldesc">Impressões sobem +73%. Estratégia de engajamento com insights está funcionando — visibilidade orgânica em alta.</div></div></div>
-    <div class="slabel">Social Selling Index (SSI)</div>
-    <div class="rrow">
-      <div class="rpill"><div class="rpill-lbl">Ranking no setor</div><div class="rpill-val">Top 3% ▲</div></div>
-      <div class="rpill"><div class="rpill-lbl">Ranking na rede</div><div class="rpill-val">Top 18% ▲</div></div>
-    </div>
-    <div class="sp"></div>
-    <div class="ssic">
-      <div class="ssih">
-        <div class="ssicircle"><div class="ssiscore">53</div><div class="ssisub">de 100</div></div>
-        <div><div class="ssititle">SSI: 53/100 — estável</div><div class="ssidesc">Ranking no setor melhorou: Top 4% → Top 3%</div></div>
-      </div>
-      <div class="crow"><div class="clbl">Marca profissional</div><div class="cbg"><div class="cfill" style="width:37%;background:#378ADD"></div></div><div class="cval">9,249 / 25</div></div>
-      <div class="crow"><div class="clbl">Pessoas certas</div><div class="cbg"><div class="cfill" style="width:32.25%;background:#1D9E75"></div></div><div class="cval">8,063 / 25</div></div>
-      <div class="crow"><div class="clbl">Engajamento com insights</div><div class="cbg"><div class="cfill" style="width:44%;background:#EF9F27"></div></div><div class="cval">11 / 25</div></div>
-      <div class="crow"><div class="clbl">Construção de relacionamentos</div><div class="cbg"><div class="cfill" style="width:100%;background:#D4537E"></div></div><div class="cval">25 / 25</div></div>
-    </div>
-    <div class="slabel">Benchmarks</div>
-    <div class="brow">
-      <div class="bc"><div class="bc-t">Média do setor (Financial Services)</div><div class="bc-s">31 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 71% acima da média</div></div>
-      <div class="bc"><div class="bc-t">Média da rede</div><div class="bc-s">39 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 36% acima da média</div></div>
-    </div>
-    <div class="slabel">Análise da semana</div>
-    <div class="ibox">
-      <div class="iitem"><div class="iicon">🚀</div><div class="itext"><strong>Impressões explodem para 466:</strong> crescimento de +73% vs. semana anterior (255 → 466). Melhor performance desde Junho.</div></div>
-      <div class="iitem"><div class="iicon">🔍</div><div class="itext"><strong>Aparições em busca RECUPERAM para 26:</strong> salto de +160% vs. Junho final (10 → 26). Estratégia funcionando!</div></div>
-      <div class="iitem"><div class="iicon">👥</div><div class="itext"><strong>+30 seguidores vs. semana anterior:</strong> base chegou a 2.108. Crescimento consistente.</div></div>
-      <div class="iitem"><div class="iicon">👁️</div><div class="itext"><strong>Visualizações de perfil: 287</strong> — crescimento de +22% (273 → 287).</div></div>
-      <div class="iitem"><div class="iicon">📈</div><div class="itext"><strong>"Pessoas certas" avança para 8,063:</strong> Ranking no setor: Top 4% → Top 3%.</div></div>
-      <div class="iitem"><div class="iicon">🎯</div><div class="itext"><strong>Próximas prioridades:</strong> manter engajamento com insights para consolidar ganhos em aparições de busca, elevar "Engajamento com insights" (11/25) para SSI ultrapassar 54.</div></div>
-    </div>
-  </div>
-
-  <!-- JUL-S3 -->
-  <div id="jjw3" class="wpanel">
-    <div class="slabel">Métricas de alcance</div>
-    <div class="mgrid">
-      <div class="mc"><div class="mc-lbl">Impressões (7 dias)</div><div class="mc-val">367</div><div class="mc-d ddn">▼ 23% vs. semana anterior</div></div>
-      <div class="mc"><div class="mc-lbl">Seguidores</div><div class="mc-val">2.139</div><div class="mc-d dup">▲ 1% vs. semana anterior</div></div>
-      <div class="mc"><div class="mc-lbl">Visualizações de perfil</div><div class="mc-val">298</div><div class="mc-d ddn">▼ 17% vs. 7 dias anteriores</div></div>
-      <div class="mc"><div class="mc-lbl">Aparições em busca</div><div class="mc-val">26</div><div class="mc-d dnt">Jun 30–Jul 6 · 0% vs. Jun 23–29</div></div>
-    </div>
-    <div class="slabel">Newsletter</div>
-    <div class="nrow">
-      <div class="nc"><div class="nc-l">Visualizações de artigo (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. 7 dias anteriores</div></div>
-      <div class="nc"><div class="nc-l">Novos assinantes (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. semana anterior</div></div>
-    </div>
-    <div class="slabel">Destaque da semana</div>
-    <div class="hlcard"><div class="hlicon">📊</div><div><div class="hltitle">Seguidores chegam a 2.139 — +31 na semana</div><div class="hldesc">Impressões recuam para 367 (-23%), mas aparições em busca mantêm-se em 26, consolidando ganho da semana anterior.</div></div></div>
-    <div class="slabel">Social Selling Index (SSI)</div>
-    <div class="rrow">
-      <div class="rpill"><div class="rpill-lbl">Ranking no setor</div><div class="rpill-val">Top 4%</div></div>
-      <div class="rpill"><div class="rpill-lbl">Ranking na rede</div><div class="rpill-val">Top 19%</div></div>
-    </div>
-    <div class="sp"></div>
-    <div class="ssic">
-      <div class="ssih">
-        <div class="ssicircle"><div class="ssiscore">53</div><div class="ssisub">de 100</div></div>
-        <div><div class="ssititle">SSI: 53/100 — estável</div><div class="ssidesc">Ranking no setor: Top 4% (sem mudança)</div></div>
-      </div>
-      <div class="crow"><div class="clbl">Marca profissional</div><div class="cbg"><div class="cfill" style="width:37%;background:#378ADD"></div></div><div class="cval">9,249 / 25</div></div>
-      <div class="crow"><div class="clbl">Pessoas certas</div><div class="cbg"><div class="cfill" style="width:30.5%;background:#1D9E75"></div></div><div class="cval">7,625 / 25</div></div>
-      <div class="crow"><div class="clbl">Engajamento com insights</div><div class="cbg"><div class="cfill" style="width:44%;background:#EF9F27"></div></div><div class="cval">11 / 25</div></div>
-      <div class="crow"><div class="clbl">Construção de relacionamentos</div><div class="cbg"><div class="cfill" style="width:100%;background:#D4537E"></div></div><div class="cval">25 / 25</div></div>
-    </div>
-    <div class="slabel">Benchmarks</div>
-    <div class="brow">
-      <div class="bc"><div class="bc-t">Média do setor (Financial Services)</div><div class="bc-s">31 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 71% acima da média</div></div>
-      <div class="bc"><div class="bc-t">Média da rede</div><div class="bc-s">39 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 36% acima da média</div></div>
-    </div>
-    <div class="slabel">Análise da semana</div>
-    <div class="ibox">
-      <div class="iitem"><div class="iicon">📉</div><div class="itext"><strong>Impressões em 367:</strong> queda de 23% vs. semana anterior (466 → 367). Padrão esperado de flutuação.</div></div>
-      <div class="iitem"><div class="iicon">👥</div><div class="itext"><strong>+31 seguidores na semana:</strong> base chegou a 2.139. Crescimento mantido desde Maio.</div></div>
-      <div class="iitem"><div class="iicon">🔍</div><div class="itext"><strong>Aparições em busca estáveis em 26:</strong> métrica consolidada — não regrediu apesar da queda de impressões.</div></div>
-      <div class="iitem"><div class="iicon">👁️</div><div class="itext"><strong>Visualizações de perfil: 298</strong> — queda de 17% vs. semana anterior.</div></div>
-      <div class="iitem"><div class="iicon">📊</div><div class="itext"><strong>"Pessoas certas" recua para 7,625:</strong> ligeira redução. SSI mantém 53/100.</div></div>
-      <div class="iitem"><div class="iicon">🎯</div><div class="itext"><strong>Objetivo da semana 4:</strong> recuperar impressões e buscar reativação de "Pessoas certas" via engajamento.</div></div>
-    </div>
-  </div>
-
-  <!-- JUL-S4 -->
-  <div id="jjw4" class="wpanel">
-    <div class="slabel">Métricas de alcance</div>
-    <div class="mgrid">
-      <div class="mc"><div class="mc-lbl">Impressões (7 dias)</div><div class="mc-val">216</div><div class="mc-d ddn">▼ 44% vs. semana anterior</div></div>
-      <div class="mc"><div class="mc-lbl">Seguidores</div><div class="mc-val">2.165</div><div class="mc-d dup">▲ 1% vs. semana anterior</div></div>
-      <div class="mc"><div class="mc-lbl">Visualizações de perfil</div><div class="mc-val">316</div><div class="mc-d dup">▲ 37% vs. 7 dias anteriores</div></div>
-      <div class="mc"><div class="mc-lbl">Aparições em busca</div><div class="mc-val">18</div><div class="mc-d dnt">Jul 7–13 · 0% vs. Jun 30–Jul 6</div></div>
-    </div>
-    <div class="slabel">Newsletter</div>
-    <div class="nrow">
-      <div class="nc"><div class="nc-l">Visualizações de artigo (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. 7 dias anteriores</div></div>
-      <div class="nc"><div class="nc-l">Novos assinantes (7d)</div><div class="nc-v">0</div><div class="nc-d dnt">0% vs. semana anterior</div></div>
-    </div>
-    <div class="slabel">Destaque da semana</div>
-    <div class="hlcard"><div class="hlicon">⚠️</div><div><div class="hltitle">Semana de recuo: Impressões caem para 216 (-44%)</div><div class="hldesc">Aparições em busca recuam para 18. Necessário reforçar engajamento estratégico para recuperar visibilidade.</div></div></div>
-    <div class="slabel">Social Selling Index (SSI)</div>
-    <div class="rrow">
-      <div class="rpill"><div class="rpill-lbl">Ranking no setor</div><div class="rpill-val">Top 4%</div></div>
-      <div class="rpill"><div class="rpill-lbl">Ranking na rede</div><div class="rpill-val">Top 19%</div></div>
-    </div>
-    <div class="sp"></div>
-    <div class="ssic">
-      <div class="ssih">
-        <div class="ssicircle"><div class="ssiscore">53</div><div class="ssisub">de 100</div></div>
-        <div><div class="ssititle">SSI: 53/100 — estável</div><div class="ssidesc">Ranking no setor: Top 4% (sem mudança)</div></div>
-      </div>
-      <div class="crow"><div class="clbl">Marca profissional</div><div class="cbg"><div class="cfill" style="width:37%;background:#378ADD"></div></div><div class="cval">9,249 / 25</div></div>
-      <div class="crow"><div class="clbl">Pessoas certas</div><div class="cbg"><div class="cfill" style="width:30.5%;background:#1D9E75"></div></div><div class="cval">7,625 / 25</div></div>
-      <div class="crow"><div class="clbl">Engajamento com insights</div><div class="cbg"><div class="cfill" style="width:44%;background:#EF9F27"></div></div><div class="cval">11 / 25</div></div>
-      <div class="crow"><div class="clbl">Construção de relacionamentos</div><div class="cbg"><div class="cfill" style="width:100%;background:#D4537E"></div></div><div class="cval">25 / 25</div></div>
-    </div>
-    <div class="slabel">Benchmarks</div>
-    <div class="brow">
-      <div class="bc"><div class="bc-t">Média do setor (Financial Services)</div><div class="bc-s">31 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 71% acima da média</div></div>
-      <div class="bc"><div class="bc-t">Média da rede</div><div class="bc-s">39 <span style="font-size:14px;color:var(--text3)">/100</span></div><div class="bc-d">Rodolfo está 36% acima da média</div></div>
-    </div>
-    <div class="slabel">Análise da semana</div>
-    <div class="ibox">
-      <div class="iitem"><div class="iicon">📉</div><div class="itext"><strong>Impressões caem para 216:</strong> queda severa de 44% vs. semana anterior (367 → 216). Maior recuo de Julho.</div></div>
-      <div class="iitem"><div class="iicon">👥</div><div class="itext"><strong>+26 seguidores na semana:</strong> base chegou a 2.165. Crescimento continua apesar da queda de impressões.</div></div>
-      <div class="iitem"><div class="iicon">🔍</div><div class="itext"><strong>Aparições em busca recuam para 18:</strong> queda de 31% vs. semana anterior (26 → 18). Métrica regrediu e necessita atenção.</div></div>
-      <div class="iitem"><div class="iicon">👁️</div><div class="itext"><strong>Visualizações de perfil: 316</strong> — crescimento de 37% em 90 dias (único indicador positivo da semana).</div></div>
-      <div class="iitem"><div class="iicon">📊</div><div class="itext"><strong>SSI mantém 53/100:</strong> componentes estáveis. Engajamento com insights ainda em 11/25 — maior potencial.</div></div>
-      <div class="iitem"><div class="iicon">🎯</div><div class="itext"><strong>Ação imediata necessária:</strong> reforçar engajamento estratégico em posts sobre estruturas empresariais e planejamento fiscal para recuperar impressões e aparições em busca.</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="footer">
-  Vértice Services · Relatório atualizado em 22 de julho de 2026 · Uso interno — equipe Rodolfo Basilio
-</div>
+  <footer>Vértice Services · Painel gerado a partir do relatório de 31 de julho de 2026 · Uso interno — equipe Rodolfo Basilio</footer>
 </div>
 
 <script>
-function showMonth(m){
-  ['maio','junho','julho'].forEach(x=>{
-    document.getElementById('p-'+x).classList.toggle('active',x===m);
+/* ================= DATA ================= */
+const COLORS = { impressions:'#14213D', followers:'#1F6F54', profileViews:'#C97A2B', searchApp:'#B84B63' };
+
+const weeks = [
+  {month:'Maio',  idx:0, label:'Mai · S1', date:'07/05', impressions:195,  followers:1890, profileViews:168, searchApp:12, ssi:52, sector:'Top 5%', network:'Top 21%'},
+  {month:'Maio',  idx:1, label:'Mai · S2', date:'13/05', impressions:143,  followers:1918, profileViews:171, searchApp:12, ssi:52, sector:'Top 4%', network:'Top 21%'},
+  {month:'Maio',  idx:2, label:'Mai · S3', date:'20/05', impressions:373,  followers:1940, profileViews:182, searchApp:15, ssi:52, sector:'Top 5%', network:'Top 21%'},
+  {month:'Maio',  idx:3, label:'Mai · S4', date:'27/05', impressions:360,  followers:1964, profileViews:200, searchApp:29, ssi:52, sector:'Top 4%', network:'Top 21%'},
+  {month:'Junho', idx:0, label:'Jun · S1', date:'03/06', impressions:213,  followers:1982, profileViews:208, searchApp:29, ssi:52, sector:'Top 4%', network:'Top 20%'},
+  {month:'Junho', idx:1, label:'Jun · S2', date:'10/06', impressions:1846, followers:2003, profileViews:234, searchApp:22, ssi:52, sector:'Top 4%', network:'Top 21%'},
+  {month:'Junho', idx:2, label:'Jun · S3', date:'17/06', impressions:341,  followers:2033, profileViews:250, searchApp:22, ssi:53, sector:'Top 4%', network:'Top 20%'},
+  {month:'Junho', idx:3, label:'Jun · S4', date:'24/06', impressions:326,  followers:2057, profileViews:268, searchApp:10, ssi:53, sector:'Top 4%', network:'Top 19%'},
+  {month:'Julho', idx:0, label:'Jul · S1', date:'01/07', impressions:255,  followers:2078, profileViews:273, searchApp:10, ssi:53, sector:'Top 3%', network:'Top 18%'},
+  {month:'Julho', idx:1, label:'Jul · S2', date:'08/07', impressions:466,  followers:2108, profileViews:287, searchApp:26, ssi:53, sector:'Top 3%', network:'Top 18%'},
+  {month:'Julho', idx:2, label:'Jul · S3', date:'15/07', impressions:367,  followers:2139, profileViews:298, searchApp:26, ssi:53, sector:'Top 4%', network:'Top 19%'},
+  {month:'Julho', idx:3, label:'Jul · S4', date:'22/07', impressions:216,  followers:2165, profileViews:316, searchApp:18, ssi:53, sector:'Top 4%', network:'Top 19%'},
+  {month:'Julho', idx:4, label:'Jul · S5', date:'29/07', impressions:293,  followers:2192, profileViews:325, searchApp:32, ssi:53, sector:'Top 4%', network:'Top 20%'},
+];
+
+const monthly = {
+  'Maio':  { impressions:360, impDelta:'+84,6% vs. sem. 1', dUp:true,
+             followers:1964, folDelta:'+74 no mês', dFolUp:true,
+             profileViews:200, pvDelta:'+19,0% vs. sem. 1', dPvUp:true,
+             searchApp:29, saDelta:'+141,7% vs. sem. 1', dSaUp:true,
+             ssi:52, ssiDelta:'Estável', ssiTone:'nt',
+             sector:'Top 4%', sectorDelta:'Melhorou', dSectorUp:true,
+             brand:9.2, right:7.0, insight:11, relationship:25,
+             networkAvg:38 },
+  'Junho': { impressions:326, impDelta:'−36% vs. pico da sem. 2 (1.846)', dUp:false,
+             followers:2057, folDelta:'+75 no mês', dFolUp:true,
+             profileViews:268, pvDelta:'+28,8% vs. sem. 1', dPvUp:true,
+             searchApp:10, saDelta:'−65,5% vs. sem. 1', dSaUp:false,
+             ssi:53, ssiDelta:'+1 ponto no mês', ssiTone:'up',
+             sector:'Top 4%', sectorDelta:'Estável', dSectorUp:null,
+             brand:9.249, right:7.813, insight:11, relationship:25,
+             networkAvg:39 },
+  'Julho': { impressions:293, impDelta:'+14,9% vs. sem. 1', dUp:true,
+             followers:2192, folDelta:'+135 vs. fechamento de Junho', dFolUp:true,
+             profileViews:325, pvDelta:'+19,0% vs. sem. 1', dPvUp:true,
+             searchApp:32, saDelta:'+220% vs. sem. 1', dSaUp:true,
+             ssi:53, ssiDelta:'Estável', ssiTone:'nt',
+             sector:'Top 4%', sectorDelta:'Estável', dSectorUp:null,
+             brand:9.249, right:7.313, insight:11, relationship:25,
+             networkAvg:39 },
+};
+
+const posts = {
+  'Maio': [
+    {rank:'🥇 #1', text:'"Já cresci rápido demais e perdi o controle. Já ajustei margem sob pressão. Já reestruturei negócio para sobreviver…"', tag:'foto', imp:226, eng:'1 comentário · 1 repost · 5 reações', link:'https://www.linkedin.com/feed/update/urn:li:activity:7460938143861731328/'},
+    {rank:'🥈 #2', text:'"Gravando mais um episódio. Existe uma diferença grande entre falar sobre negócios…"', tag:'foto', imp:203, eng:'3 comentários · 8 reações', link:'https://www.linkedin.com/feed/update/urn:li:activity:7455300710037958657/'},
+    {rank:'🥉 #3', text:'"A empresa que só funciona quando o dono está presente não é uma empresa. É um emprego com CNPJ…"', tag:'texto', imp:149, eng:'', link:'https://www.linkedin.com/feed/update/urn:li:activity:7461083155127652352/'},
+  ],
+  'Junho': [
+    {rank:'🥇 #1', text:'"Em 2007, propus trabalhar de graça num escritório de contabilidade em Londres…"', tag:'texto', imp:2000, eng:'3 engagements · post que gerou o pico de +692% na semana', link:'https://www.linkedin.com/feed/update/urn:li:share:7468157329209872384/'},
+    {rank:'🥈 #2', text:'"Quando subi no palco do IET Savoy Place para falar sobre crescer em tempos difíceis…"', tag:'foto', imp:130, eng:'4 engagements', link:'https://www.linkedin.com/feed/update/urn:li:share:7468157624073687040/'},
+    {rank:'🥉 #3', text:'"Dois sócios. Empresa de consultoria. Em Londres. Os dois retiravam £3.000 por mês…"', tag:'texto', imp:110, eng:'2 engagements', link:'https://www.linkedin.com/feed/update/urn:li:share:7474491447090765824/'},
+  ],
+  'Julho': [
+    {rank:'🥇 #1', text:'"Em 2007, minha irmã chegou em Londres para trabalhar numa loja…"', tag:'foto', imp:329, eng:'12 engagements', link:'https://www.linkedin.com/feed/update/urn:li:share:7485726194215129089/'},
+    {rank:'🥈 #2', text:'"Todo brasileiro que mora no UK passa pelo mesmo rito de passagem. Não é o sotaque…"', tag:'texto', imp:222, eng:'3 engagements', link:'https://www.linkedin.com/feed/update/urn:li:share:7478904157987495939/'},
+    {rank:'🥉 #3', text:'"Em 2007, comecei a Vértice num quarto de casa compartilhada…"', tag:'foto', imp:197, eng:'11 engagements', link:'https://www.linkedin.com/feed/update/urn:li:share:7478801817410256897/'},
+  ],
+};
+
+const insights = {
+  'Maio': [
+    {icon:'🔍', html:'<strong>Aparições em busca triplicaram no mês:</strong> de 12 para 29 — o maior avanço de toda a base. Sinal de relevância orgânica crescente.'},
+    {icon:'👥', html:'<strong>+74 seguidores em 4 semanas</strong>, sem nenhuma semana negativa. Base fechou Maio em 1.964.'},
+    {icon:'📊', html:'<strong>Impressões fecharam 84,6% acima da semana 1</strong>, apesar da oscilação ao longo do mês.'},
+    {icon:'⚡', html:'<strong>SSI estável em 52 — oportunidade clara:</strong> "Engajamento com insights" (11/25) é o componente mais fraco e a principal alavanca para os próximos meses.'},
+    {icon:'🎯', html:'<strong>Meta definida para Junho:</strong> consolidar impressões acima de 300/semana, crescer a newsletter e começar a subir o SSI via mais comentários estratégicos.'},
+  ],
+  'Junho': [
+    {icon:'🚀', html:'<strong>Semana histórica:</strong> um único post levou as impressões a 1.846 (+692%). Mostra o poder de um conteúdo certo bem distribuído.'},
+    {icon:'👥', html:'<strong>Marco de 2.000 seguidores atingido</strong> — base cresceu +75 no mês, chegando a 2.057.'},
+    {icon:'👁️', html:'<strong>Visualizações de perfil em alta constante</strong> semana após semana (208 → 234 → 250 → 268), independente das oscilações de impressões.'},
+    {icon:'📈', html:'<strong>SSI subiu para 53</strong> — primeiro avanço desde o início do acompanhamento, puxado pelo componente "Pessoas certas".'},
+    {icon:'⚠️', html:'<strong>Ponto de atenção:</strong> aparições em busca caíram 65,5% no mês (29 → 10) — métrica priorizada para Julho.'},
+  ],
+  'Julho': [
+    {icon:'🔍', html:'<strong>Recuperação em aparições de busca:</strong> +220% no mês (10 → 32), a melhor marca do trimestre — o engajamento estratégico voltou a funcionar.'},
+    {icon:'👥', html:'<strong>+135 seguidores vs. o fechamento de Junho</strong>, base chegou a 2.192. Crescimento contínuo desde Maio, sem interrupção.'},
+    {icon:'👁️', html:'<strong>Visualizações de perfil batem novo recorde:</strong> 325, +19% no mês — interesse pelo perfil segue subindo mesmo em semanas de impressões mais baixas.'},
+    {icon:'📉', html:'<strong>Mês de volatilidade nas impressões</strong> (255 → 466 → 367 → 216 → 293), mas com recuperação clara na última semana.'},
+    {icon:'🎯', html:'<strong>Prioridade para Agosto:</strong> consolidar o ganho em aparições de busca e elevar "Engajamento com insights" (ainda 11/25) para levar o SSI acima de 54.'},
+  ],
+};
+
+const monthOrder = ['Maio','Junho','Julho'];
+const compFullLabel = {'Maio':'Maio 2026','Junho':'Junho 2026','Julho':'Julho 2026'};
+
+/* ================= STATE ================= */
+let currentPeriod = 'Julho'; // 'Maio' | 'Junho' | 'Julho' | 'Comparativo'
+let currentMetric = 'impressions';
+
+const METRICS = [
+  {key:'impressions', label:'Impressões', unit:''},
+  {key:'followers',   label:'Seguidores', unit:''},
+  {key:'profileViews',label:'Visualizações de perfil', unit:''},
+  {key:'searchApp',   label:'Aparições em busca', unit:''},
+];
+
+/* ================= PERIOD TABS ================= */
+const periodbar = document.getElementById('periodbar');
+['Maio','Junho','Julho','Comparativo'].forEach(p=>{
+  const b=document.createElement('button');
+  b.className='ptab'+(p===currentPeriod?' active':'')+(p==='Comparativo'?' ptab-cmp':'');
+  b.dataset.p=p;
+  b.innerHTML = (p==='Comparativo' ? '<span class="dot"></span> ⇄ Comparativo (3 meses)' : '<span class="dot"></span> '+p+' 2026');
+  b.onclick=()=>{ currentPeriod=p; render(); };
+  periodbar.appendChild(b);
+});
+
+/* ================= METRIC TOGGLE ================= */
+const metricToggle = document.getElementById('metric-toggle');
+METRICS.forEach(m=>{
+  const b=document.createElement('button');
+  b.className='mbtn';
+  b.textContent=m.label;
+  b.onclick=()=>{ currentMetric=m.key; render(); };
+  metricToggle.appendChild(b);
+});
+
+/* ================= HELPERS ================= */
+function fmt(n){ return n.toLocaleString('pt-BR'); }
+function weeksFor(period){
+  if(period==='Comparativo') return weeks;
+  return weeks.filter(w=>w.month===period);
+}
+
+/* ================= KPI CARDS ================= */
+function renderKPI(){
+  const grid = document.getElementById('kpi-grid');
+  grid.innerHTML='';
+  document.getElementById('resumo-title').textContent = compFullLabel[currentPeriod] || '';
+
+  const m = monthly[currentPeriod];
+  const cards = [
+    {lbl:'Impressões (7 dias)', info:'Vezes que os posts apareceram no feed de alguém na última semana do mês', val:fmt(m.impressions), d:m.impDelta, tone: m.dUp?'up':'dn'},
+    {lbl:'Seguidores', info:'Total de seguidores ao final do mês', val:fmt(m.followers), d:m.folDelta, tone: m.dFolUp?'up':'dn'},
+    {lbl:'Visualizações de perfil', info:'Cliques para abrir o perfil completo', val:fmt(m.profileViews), d:m.pvDelta, tone: m.dPvUp?'up':'dn'},
+    {lbl:'Aparições em busca', info:'Vezes que o perfil apareceu em resultados de busca', val:fmt(m.searchApp), d:m.saDelta, tone: m.dSaUp?'up':'dn'},
+    {lbl:'SSI', info:'Nota do LinkedIn para força do perfil (0–100)', val:m.ssi, d:m.ssiDelta, tone: m.ssiTone},
+    {lbl:'Ranking no setor', info:'Posição vs. profissionais de Financial Services', val:m.sector, d:m.sectorDelta, tone: m.dSectorUp===null?'nt':(m.dSectorUp?'up':'dn')},
+  ];
+  cards.forEach(c=>grid.appendChild(kpiCard(c)));
+}
+function kpiCard(c){
+  const div=document.createElement('div'); div.className='kpi';
+  const toneClass = c.tone==='up'?'d-up':c.tone==='dn'?'d-dn':'d-nt';
+  const arrow = c.tone==='up'?'▲':c.tone==='dn'?'▼':'—';
+  div.innerHTML = `
+    <div class="kpi-lbl">${c.lbl}<span class="info" title="${c.info}">i</span></div>
+    <div class="kpi-val">${c.val}</div>
+    <div class="kpi-d ${toneClass}">${arrow} ${c.d}</div>`;
+  return div;
+}
+
+/* ================= TREND CHART ================= */
+let trendChart;
+function renderTrend(){
+  document.querySelectorAll('.mbtn').forEach((b,i)=>{
+    b.classList.toggle('active', METRICS[i].key===currentMetric);
+    b.style.background = METRICS[i].key===currentMetric ? COLORS[METRICS[i].key] : '#fff';
+    b.style.borderColor = METRICS[i].key===currentMetric ? COLORS[METRICS[i].key] : '';
   });
-  document.querySelectorAll('.mtab').forEach(t=>{
-    t.classList.toggle('active',t.classList.contains(m));
+
+  const data = weeksFor(currentPeriod);
+  const labels = data.map(w=>w.label);
+  const values = data.map(w=>w[currentMetric]);
+  const color = COLORS[currentMetric];
+
+  const ctx = document.getElementById('trendChart').getContext('2d');
+  if(trendChart) trendChart.destroy();
+
+  // month boundary shading for 'Comparativo'
+  const monthChangeIdx = [];
+  if(currentPeriod==='Comparativo'){
+    let last='';
+    data.forEach((w,i)=>{ if(w.month!==last){ monthChangeIdx.push(i); last=w.month; } });
+  }
+
+  trendChart = new Chart(ctx, {
+    type:'line',
+    data:{ labels, datasets:[{
+      label: METRICS.find(m=>m.key===currentMetric).label,
+      data: values,
+      borderColor: color,
+      backgroundColor: color+'22',
+      pointBackgroundColor: color,
+      pointBorderColor:'#fff',
+      pointBorderWidth:2,
+      pointRadius:4,
+      pointHoverRadius:6,
+      borderWidth:2.5,
+      fill:true,
+      tension:.32,
+    }]},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{ mode:'index', intersect:false },
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          backgroundColor:'#14213D', padding:10, cornerRadius:8,
+          titleFont:{family:'Inter',weight:'700'}, bodyFont:{family:'Inter'},
+          callbacks:{ label:(ctx)=> ' '+fmt(ctx.parsed.y) }
+        }
+      },
+      scales:{
+        x:{ grid:{display:false}, ticks:{font:{family:'IBM Plex Mono',size:10.5}, color:'#96968D'} },
+        y:{ grid:{color:'#E4E0D5'}, ticks:{font:{family:'Inter',size:11}, color:'#96968D', callback:v=>fmt(v)} }
+      }
+    }
+  });
+
+  const note = document.getElementById('trend-note');
+  if(currentPeriod==='Comparativo'){
+    note.textContent = 'Período completo: 07/05 a 31/07/2026 · 13 semanas de acompanhamento, com as 3 viradas de mês marcadas.';
+  } else {
+    note.textContent = `${currentPeriod} de 2026 · ${data.length} semanas.`;
+  }
+}
+
+/* ================= MONTHLY COMPARISON — small multiples, one metric per card ================= */
+let metricCardCharts = [];
+function renderMonthChart(){
+  const grid = document.getElementById('metric-cards-grid');
+  grid.innerHTML = '';
+  metricCardCharts.forEach(c=>c.destroy());
+  metricCardCharts = [];
+
+  METRICS.forEach(m=>{
+    const cardId = 'mcard-'+m.key;
+    const card = document.createElement('div');
+    card.className='card';
+    card.innerHTML = `
+      <div class="metric-card-head">
+        <div class="metric-card-dot" style="background:${COLORS[m.key]}"></div>
+        <div class="metric-card-title">${m.label}</div>
+      </div>
+      <div class="metric-card-chart"><canvas id="${cardId}"></canvas></div>
+      <div class="metric-card-foot">
+        <span class="metric-card-latest">Julho</span>
+        <span class="metric-card-latest"><b>${fmt(monthly['Julho'][m.key])}</b></span>
+      </div>`;
+    grid.appendChild(card);
+
+    const ctx = document.getElementById(cardId).getContext('2d');
+    const chart = new Chart(ctx, {
+      type:'bar',
+      data:{
+        labels: monthOrder,
+        datasets:[{
+          data: monthOrder.map(mo=>monthly[mo][m.key]),
+          backgroundColor: monthOrder.map(mo=> mo==='Julho' ? COLORS[m.key] : COLORS[m.key]+'55'),
+          borderRadius:6,
+          maxBarThickness:46,
+        }]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{
+          legend:{display:false},
+          tooltip:{ backgroundColor:'#14213D', padding:9, cornerRadius:8,
+            callbacks:{ label:(ctx)=> ' '+fmt(ctx.parsed.y) } }
+        },
+        scales:{
+          x:{ grid:{display:false}, ticks:{font:{family:'Inter',weight:'600',size:11.5}, color:'#5B5F6E'} },
+          y:{ grid:{color:'#EEECE3'}, beginAtZero:true, ticks:{font:{family:'Inter',size:10}, color:'#96968D', maxTicksLimit:4, callback:v=>fmt(v)} }
+        }
+      }
+    });
+    metricCardCharts.push(chart);
   });
 }
-function showWM(n){
-  ['mw1','mw2','mw3','mw4','mw5'].forEach((id,i)=>{
-    document.getElementById(id).classList.toggle('active',i===n-1);
-  });
-  document.querySelectorAll('#p-maio .wtab').forEach((t,i)=>{
-    t.classList.toggle('active',i===n-1);
+
+function renderMonthTable(){
+  const t = document.getElementById('month-table');
+  const rows = [
+    ['Impressões (fech.)', ...monthOrder.map(m=>fmt(monthly[m].impressions))],
+    ['Seguidores', ...monthOrder.map(m=>fmt(monthly[m].followers))],
+    ['Visualiz. de perfil', ...monthOrder.map(m=>fmt(monthly[m].profileViews))],
+    ['Aparições em busca', ...monthOrder.map(m=>fmt(monthly[m].searchApp))],
+    ['SSI', ...monthOrder.map(m=>monthly[m].ssi)],
+    ['Ranking no setor', ...monthOrder.map(m=>monthly[m].sector)],
+  ];
+  t.innerHTML = `<thead><tr><th>Métrica</th>${monthOrder.map(m=>`<th>${m}</th>`).join('')}</tr></thead>
+  <tbody>${rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</tbody>`;
+}
+
+/* ================= SSI ================= */
+let ssiGaugeChart;
+function renderSSI(){
+  const period = currentPeriod;
+  const m = monthly[period];
+  const total = m.brand + m.right + m.insight + m.relationship;
+
+  document.getElementById('ssi-score-val').textContent = m.ssi;
+  document.getElementById('ssi-sector').textContent = m.sector;
+  const lastWeekOfMonth = weeks.filter(w=>w.month===period).slice(-1)[0];
+  document.getElementById('ssi-network').textContent = lastWeekOfMonth.network;
+
+  const comps = [
+    {lbl:'Marca profissional', val:m.brand, color:'#378ADD'},
+    {lbl:'Pessoas certas', val:m.right, color:'#1D9E75'},
+    {lbl:'Engajamento com insights', val:m.insight, color:'#C97A2B'},
+    {lbl:'Construção de relacionamentos', val:m.relationship, color:'#B84B63'},
+  ];
+  const box = document.getElementById('ssi-components');
+  box.innerHTML = comps.map(c=>`
+    <div class="comp-row">
+      <div class="comp-lbl">${c.lbl}</div>
+      <div class="comp-track"><div class="comp-fill" style="width:${(c.val/25*100).toFixed(1)}%;background:${c.color}"></div></div>
+      <div class="comp-val">${c.val.toLocaleString('pt-BR',{maximumFractionDigits:2})} / 25</div>
+    </div>`).join('');
+
+  document.getElementById('bench-sector').textContent = 'Rodolfo está ' + Math.round((m.ssi-31)/31*100) + '% acima da média';
+  document.getElementById('bench-network-val').innerHTML = m.networkAvg + ' <span style="font-size:13px;color:var(--text3)">/100</span>';
+  document.getElementById('bench-network').textContent = 'Rodolfo está ' + Math.round((m.ssi-m.networkAvg)/m.networkAvg*100) + '% acima da média';
+
+  const ctx = document.getElementById('ssiGauge').getContext('2d');
+  if(ssiGaugeChart) ssiGaugeChart.destroy();
+  ssiGaugeChart = new Chart(ctx, {
+    type:'doughnut',
+    data:{ datasets:[{ data:[m.ssi, 100-m.ssi], backgroundColor:['#14213D','#EEECE3'], borderWidth:0, cutout:'78%' }] },
+    options:{ responsive:true, maintainAspectRatio:false, rotation:-90, circumference:360,
+      plugins:{ tooltip:{enabled:false}, legend:{display:false} } }
   });
 }
-function showWJ(n){
-  ['jw1','jw2','jw3','jw4','jw5'].forEach((id,i)=>{
-    document.getElementById(id).classList.toggle('active',i===n-1);
-  });
-  document.querySelectorAll('#p-junho .wtab').forEach((t,i)=>{
-    t.classList.toggle('active',i===n-1);
+
+/* ================= POSTS ================= */
+function renderPosts(){
+  const grid = document.getElementById('posts-grid');
+  grid.innerHTML='';
+  const list = posts[currentPeriod] || [];
+  if(list.length===0){
+    grid.innerHTML = `<div class="post-empty">Nenhuma publicação em destaque registrada no relatório para este período.</div>`;
+    return;
+  }
+  list.forEach(p=>{
+    const card=document.createElement('div'); card.className='post-card';
+    const previewInner = p.link
+      ? `<a href="${p.link}" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(29,34,51,.25)">${p.text}</a>`
+      : p.text;
+    card.innerHTML = `
+      <div class="post-rank">${p.rank}</div>
+      <div class="post-preview">${previewInner}</div>
+      <div class="post-meta">
+        <span class="post-tag ${p.tag==='foto'?'tag-foto':'tag-texto'}">${p.tag==='foto'?'📷 Com foto':'✍️ Só texto'}</span>
+        <span class="post-imp">▲ ${fmt(p.imp)} impressões</span>
+      </div>
+      ${p.eng ? `<div style="font-size:11.5px;color:var(--text3)">${p.eng}</div>` : ''}
+    `;
+    grid.appendChild(card);
   });
 }
-function showWJulio(n){
-  ['jjw1','jjw2','jjw3','jjw4'].forEach((id,i)=>{
-    document.getElementById(id).classList.toggle('active',i===n-1);
-  });
-  document.querySelectorAll('#p-julho .wtab').forEach((t,i)=>{
-    t.classList.toggle('active',i===n-1);
-  });
+
+/* ================= INSIGHTS ================= */
+function renderInsights(){
+  const box = document.getElementById('insights-box');
+  box.innerHTML = insights[currentPeriod].map(i=>`
+    <div class="irow"><div class="iicon">${i.icon}</div><div class="itext">${i.html}</div></div>`).join('');
 }
+
+/* ================= MAIN RENDER ================= */
+const monthOnlySections = ['sec-resumo','sec-ssi','sec-posts','sec-insights'];
+function render(){
+  document.querySelectorAll('.ptab').forEach(b=> b.classList.toggle('active', b.dataset.p===currentPeriod));
+
+  const isComparativo = currentPeriod==='Comparativo';
+
+  // seções exclusivas do mês somem na aba Comparativo
+  monthOnlySections.forEach(id=>{
+    document.getElementById(id).style.display = isComparativo ? 'none' : '';
+  });
+  // seção comparativa só aparece na própria aba
+  document.getElementById('sec-comparativo').style.display = isComparativo ? '' : 'none';
+  // rótulo e texto da evolução mudam conforme o contexto
+  document.querySelector('#sec-evolucao .sec-title').textContent = isComparativo
+    ? 'Linha do tempo completa do trimestre'
+    : 'Evolução ao longo do tempo';
+  document.querySelector('#sec-evolucao .sec-desc').textContent = isComparativo
+    ? 'As 13 semanas de Maio a Julho em sequência, com as viradas de mês. Use os botões para trocar a métrica.'
+    : 'Cada semana do mês selecionado. Use os botões para trocar a métrica exibida.';
+
+  renderTrend();
+  if(!isComparativo){
+    renderKPI();
+    renderSSI();
+    renderPosts();
+    renderInsights();
+  } else {
+    renderMonthChart();
+    renderMonthTable();
+  }
+}
+render();
 </script>
 </body>
 </html>
