@@ -176,7 +176,7 @@ footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--card-line);te
       <div class="h-title">Painel de Performance — LinkedIn</div>
       <div class="h-sub">Rodolfo Basilio · leitura conjunta para toda a equipe</div>
     </div>
-    <div class="h-meta">Atualizado em 31/07/2026<br>Acompanhamento desde 07/05/2026</div>
+    <div class="h-meta">Atualizado em 05/08/2026<br>Acompanhamento desde 07/05/2026</div>
   </div>
   <div class="periodbar" id="periodbar"></div>
 </header>
@@ -186,7 +186,7 @@ footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--card-line);te
   <!-- RESUMO -->
   <section id="sec-resumo">
     <div class="eyebrow">Resumo do período selecionado</div>
-    <h2 class="sec-title" id="resumo-title">Julho 2026</h2>
+    <h2 class="sec-title" id="resumo-title">Agosto 2026</h2>
     <p class="sec-desc">Números fechados do período, comparados com a semana ou mês anterior. Passe o mouse no ícone <span style="font-family:'IBM Plex Mono',monospace">i</span> de cada card para entender o que a métrica significa.</p>
     <div class="kpi-grid" id="kpi-grid"></div>
   </section>
@@ -209,7 +209,7 @@ footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--card-line);te
   <!-- COMPARATIVO ENTRE MESES -->
   <section id="sec-comparativo">
     <div class="eyebrow">Comparativo mensal</div>
-    <h2 class="sec-title">Maio × Junho × Julho</h2>
+    <h2 class="sec-title">Maio × Junho × Julho × Agosto</h2>
     <p class="sec-desc">Cada métrica tem sua própria escala, em um cartão separado — assim seguidores (na casa dos milhares) não distorce a leitura de impressões, visualizações ou buscas (na casa das centenas).</p>
     <div class="metric-cards-grid" id="metric-cards-grid"></div>
     <div class="card" style="margin-top:14px">
@@ -276,7 +276,7 @@ footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--card-line);te
     </div>
   </section>
 
-  <footer>Vértice Services · Painel gerado a partir do relatório de 31 de julho de 2026 · Uso interno — equipe Rodolfo Basilio</footer>
+  <footer>Vértice Services · Painel gerado a partir do relatório de 05 de agosto de 2026 · Uso interno — equipe Rodolfo Basilio</footer>
 </div>
 
 <script>
@@ -297,6 +297,7 @@ const weeks = [
   {month:'Julho', idx:2, label:'Jul · S3', date:'15/07', impressions:367,  followers:2139, profileViews:298, searchApp:26, ssi:53, sector:'Top 4%', network:'Top 19%'},
   {month:'Julho', idx:3, label:'Jul · S4', date:'22/07', impressions:216,  followers:2165, profileViews:316, searchApp:18, ssi:53, sector:'Top 4%', network:'Top 19%'},
   {month:'Julho', idx:4, label:'Jul · S5', date:'29/07', impressions:293,  followers:2192, profileViews:325, searchApp:32, ssi:53, sector:'Top 4%', network:'Top 20%'},
+  {month:'Agosto',idx:0, label:'Ago · S1', date:'05/08', impressions:72,   followers:2224, profileViews:323, searchApp:27, ssi:52, sector:'Top 4%', network:'Top 20%'},
 ];
 
 const monthly = {
@@ -324,6 +325,14 @@ const monthly = {
              sector:'Top 4%', sectorDelta:'Estável', dSectorUp:null,
              brand:9.249, right:7.313, insight:11, relationship:25,
              networkAvg:39 },
+  'Agosto': { impressions:72, impDelta:'−76% vs. sem. anterior (Jul · S5)', dUp:false,
+             followers:2224, folDelta:'+1% vs. sem. anterior (+32)', dFolUp:true,
+             profileViews:323, pvDelta:'−3% vs. sem. anterior', dPvUp:false,
+             searchApp:27, saDelta:'Estável vs. sem. anterior', dSaUp:null,
+             ssi:52, ssiDelta:'−1 ponto vs. Julho', ssiTone:'dn',
+             sector:'Top 4%', sectorDelta:'Estável', dSectorUp:null,
+             brand:9.249, right:7.125, insight:11, relationship:25,
+             networkAvg:39 },
 };
 
 const posts = {
@@ -342,6 +351,7 @@ const posts = {
     {rank:'🥈 #2', text:'"Todo brasileiro que mora no UK passa pelo mesmo rito de passagem. Não é o sotaque…"', tag:'texto', imp:222, eng:'3 engagements', link:'https://www.linkedin.com/feed/update/urn:li:share:7478904157987495939/'},
     {rank:'🥉 #3', text:'"Em 2007, comecei a Vértice num quarto de casa compartilhada…"', tag:'foto', imp:197, eng:'11 engagements', link:'https://www.linkedin.com/feed/update/urn:li:share:7478801817410256897/'},
   ],
+  'Agosto': [],
 };
 
 const insights = {
@@ -366,13 +376,21 @@ const insights = {
     {icon:'📉', html:'<strong>Mês de volatilidade nas impressões</strong> (255 → 466 → 367 → 216 → 293), mas com recuperação clara na última semana.'},
     {icon:'🎯', html:'<strong>Prioridade para Agosto:</strong> consolidar o ganho em aparições de busca e elevar "Engajamento com insights" (ainda 11/25) para levar o SSI acima de 54.'},
   ],
+  'Agosto': [
+    {icon:'🗓️', html:'<strong>Ainda é a primeira semana do mês</strong> (fechamento em 05/08) — os números abaixo refletem só 7 dias, não um mês completo. Leitura mais confiável virá com mais semanas.'},
+    {icon:'📉', html:'<strong>Impressões caíram para 72 na semana</strong> (−76% vs. a última semana de Julho). Sem post de destaque registrado ainda no período — vale checar a frequência de publicação.'},
+    {icon:'👥', html:'<strong>Seguidores seguem crescendo:</strong> +32 na semana, base passou de 2.192 para 2.224 — nenhuma semana de queda desde o início do acompanhamento.'},
+    {icon:'👁️', html:'<strong>Visualizações de perfil e aparições em busca ficaram estáveis</strong> (323 e 27, variação de −3% e 0%) — sinal de que o interesse no perfil não caiu junto com as impressões.'},
+    {icon:'⚡', html:'<strong>SSI recuou 1 ponto, para 52:</strong> puxado por "Pessoas certas" (7,125, abaixo dos 7,313 de Julho). "Engajamento com insights" segue travado em 11/25 — continua sendo a maior alavanca disponível.'},
+    {icon:'🎯', html:'<strong>Prioridade para o resto de Agosto:</strong> retomar o ritmo de publicações para reverter a queda de impressões e voltar a movimentar "Pessoas certas" e "Engajamento com insights".'},
+  ],
 };
 
-const monthOrder = ['Maio','Junho','Julho'];
-const compFullLabel = {'Maio':'Maio 2026','Junho':'Junho 2026','Julho':'Julho 2026'};
+const monthOrder = ['Maio','Junho','Julho','Agosto'];
+const compFullLabel = {'Maio':'Maio 2026','Junho':'Junho 2026','Julho':'Julho 2026','Agosto':'Agosto 2026'};
 
 /* ================= STATE ================= */
-let currentPeriod = 'Julho'; // 'Maio' | 'Junho' | 'Julho' | 'Comparativo'
+let currentPeriod = 'Agosto'; // 'Maio' | 'Junho' | 'Julho' | 'Agosto' | 'Comparativo'
 let currentMetric = 'impressions';
 
 const METRICS = [
@@ -384,7 +402,7 @@ const METRICS = [
 
 /* ================= PERIOD TABS ================= */
 const periodbar = document.getElementById('periodbar');
-['Maio','Junho','Julho','Comparativo'].forEach(p=>{
+['Maio','Junho','Julho','Agosto','Comparativo'].forEach(p=>{
   const b=document.createElement('button');
   b.className='ptab'+(p===currentPeriod?' active':'')+(p==='Comparativo'?' ptab-cmp':'');
   b.dataset.p=p;
@@ -504,7 +522,7 @@ function renderTrend(){
 
   const note = document.getElementById('trend-note');
   if(currentPeriod==='Comparativo'){
-    note.textContent = 'Período completo: 07/05 a 31/07/2026 · 13 semanas de acompanhamento, com as 3 viradas de mês marcadas.';
+    note.textContent = 'Período completo: 07/05 a 05/08/2026 · 14 semanas de acompanhamento, com as 3 viradas de mês marcadas.';
   } else {
     note.textContent = `${currentPeriod} de 2026 · ${data.length} semanas.`;
   }
@@ -518,6 +536,7 @@ function renderMonthChart(){
   metricCardCharts.forEach(c=>c.destroy());
   metricCardCharts = [];
 
+  const latestMonth = monthOrder[monthOrder.length-1];
   METRICS.forEach(m=>{
     const cardId = 'mcard-'+m.key;
     const card = document.createElement('div');
@@ -529,8 +548,8 @@ function renderMonthChart(){
       </div>
       <div class="metric-card-chart"><canvas id="${cardId}"></canvas></div>
       <div class="metric-card-foot">
-        <span class="metric-card-latest">Julho</span>
-        <span class="metric-card-latest"><b>${fmt(monthly['Julho'][m.key])}</b></span>
+        <span class="metric-card-latest">${latestMonth}</span>
+        <span class="metric-card-latest"><b>${fmt(monthly[latestMonth][m.key])}</b></span>
       </div>`;
     grid.appendChild(card);
 
@@ -541,7 +560,7 @@ function renderMonthChart(){
         labels: monthOrder,
         datasets:[{
           data: monthOrder.map(mo=>monthly[mo][m.key]),
-          backgroundColor: monthOrder.map(mo=> mo==='Julho' ? COLORS[m.key] : COLORS[m.key]+'55'),
+          backgroundColor: monthOrder.map(mo=> mo===latestMonth ? COLORS[m.key] : COLORS[m.key]+'55'),
           borderRadius:6,
           maxBarThickness:46,
         }]
@@ -574,7 +593,7 @@ function renderMonthTable(){
     ['Ranking no setor', ...monthOrder.map(m=>monthly[m].sector)],
   ];
   t.innerHTML = `<thead><tr><th>Métrica</th>${monthOrder.map(m=>`<th>${m}</th>`).join('')}</tr></thead>
-  <tbody>${rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</tbody>`;
+  <tbody>${rows.map(r=>`<tr><td>${r[0]}</td>${r.slice(1).map(v=>`<td>${v}</td>`).join('')}</tr>`).join('')}</tbody>`;
 }
 
 /* ================= SSI ================= */
@@ -669,7 +688,7 @@ function render(){
     ? 'Linha do tempo completa do trimestre'
     : 'Evolução ao longo do tempo';
   document.querySelector('#sec-evolucao .sec-desc').textContent = isComparativo
-    ? 'As 13 semanas de Maio a Julho em sequência, com as viradas de mês. Use os botões para trocar a métrica.'
+    ? 'As 14 semanas de Maio a Agosto em sequência, com as viradas de mês. Use os botões para trocar a métrica.'
     : 'Cada semana do mês selecionado. Use os botões para trocar a métrica exibida.';
 
   renderTrend();
