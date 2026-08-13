@@ -176,7 +176,7 @@ footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--card-line);te
       <div class="h-title">Painel de Performance — LinkedIn</div>
       <div class="h-sub">Rodolfo Basilio · leitura conjunta para toda a equipe</div>
     </div>
-    <div class="h-meta">Atualizado em 05/08/2026<br>Acompanhamento desde 07/05/2026</div>
+    <div class="h-meta">Atualizado em 12/08/2026<br>Acompanhamento desde 07/05/2026</div>
   </div>
   <div class="periodbar" id="periodbar"></div>
 </header>
@@ -276,7 +276,7 @@ footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--card-line);te
     </div>
   </section>
 
-  <footer>Vértice Services · Painel gerado a partir do relatório de 05 de agosto de 2026 · Uso interno — equipe Rodolfo Basilio</footer>
+  <footer>Vértice Services · Painel gerado a partir do relatório de 12 de agosto de 2026 · Uso interno — equipe Rodolfo Basilio</footer>
 </div>
 
 <script>
@@ -298,6 +298,7 @@ const weeks = [
   {month:'Julho', idx:3, label:'Jul · S4', date:'22/07', impressions:216,  followers:2165, profileViews:316, searchApp:18, ssi:53, sector:'Top 4%', network:'Top 19%'},
   {month:'Julho', idx:4, label:'Jul · S5', date:'29/07', impressions:293,  followers:2192, profileViews:325, searchApp:32, ssi:53, sector:'Top 4%', network:'Top 20%'},
   {month:'Agosto',idx:0, label:'Ago · S1', date:'05/08', impressions:72,   followers:2224, profileViews:323, searchApp:27, ssi:52, sector:'Top 4%', network:'Top 20%'},
+  {month:'Agosto',idx:1, label:'Ago · S2', date:'12/08', impressions:101,  followers:2249, profileViews:324, searchApp:20, ssi:52, sector:'Top 5%', network:'Top 20%'},
 ];
 
 const monthly = {
@@ -325,13 +326,13 @@ const monthly = {
              sector:'Top 4%', sectorDelta:'Estável', dSectorUp:null,
              brand:9.249, right:7.313, insight:11, relationship:25,
              networkAvg:39 },
-  'Agosto': { impressions:72, impDelta:'−76% vs. sem. anterior (Jul · S5)', dUp:false,
-             followers:2224, folDelta:'+1% vs. sem. anterior (+32)', dFolUp:true,
-             profileViews:323, pvDelta:'−3% vs. sem. anterior', dPvUp:false,
-             searchApp:27, saDelta:'Estável vs. sem. anterior', dSaUp:null,
-             ssi:52, ssiDelta:'−1 ponto vs. Julho', ssiTone:'dn',
-             sector:'Top 4%', sectorDelta:'Estável', dSectorUp:null,
-             brand:9.249, right:7.125, insight:11, relationship:25,
+  'Agosto': { impressions:101, impDelta:'+40,3% vs. sem. 1', dUp:true,
+             followers:2249, folDelta:'+25 no mês', dFolUp:true,
+             profileViews:324, pvDelta:'+0,3% vs. sem. 1', dPvUp:true,
+             searchApp:20, saDelta:'−25,9% vs. sem. 1', dSaUp:false,
+             ssi:52, ssiDelta:'Estável no mês (−1 ponto vs. Julho)', ssiTone:'nt',
+             sector:'Top 5%', sectorDelta:'Piorou vs. sem. 1 (Top 4%)', dSectorUp:false,
+             brand:9.357, right:6.6, insight:11, relationship:25,
              networkAvg:39 },
 };
 
@@ -377,12 +378,12 @@ const insights = {
     {icon:'🎯', html:'<strong>Prioridade para Agosto:</strong> consolidar o ganho em aparições de busca e elevar "Engajamento com insights" (ainda 11/25) para levar o SSI acima de 54.'},
   ],
   'Agosto': [
-    {icon:'🗓️', html:'<strong>Ainda é a primeira semana do mês</strong> (fechamento em 05/08) — os números abaixo refletem só 7 dias, não um mês completo. Leitura mais confiável virá com mais semanas.'},
-    {icon:'📉', html:'<strong>Impressões caíram para 72 na semana</strong> (−76% vs. a última semana de Julho). Sem post de destaque registrado ainda no período — vale checar a frequência de publicação.'},
-    {icon:'👥', html:'<strong>Seguidores seguem crescendo:</strong> +32 na semana, base passou de 2.192 para 2.224 — nenhuma semana de queda desde o início do acompanhamento.'},
-    {icon:'👁️', html:'<strong>Visualizações de perfil e aparições em busca ficaram estáveis</strong> (323 e 27, variação de −3% e 0%) — sinal de que o interesse no perfil não caiu junto com as impressões.'},
-    {icon:'⚡', html:'<strong>SSI recuou 1 ponto, para 52:</strong> puxado por "Pessoas certas" (7,125, abaixo dos 7,313 de Julho). "Engajamento com insights" segue travado em 11/25 — continua sendo a maior alavanca disponível.'},
-    {icon:'🎯', html:'<strong>Prioridade para o resto de Agosto:</strong> retomar o ritmo de publicações para reverter a queda de impressões e voltar a movimentar "Pessoas certas" e "Engajamento com insights".'},
+    {icon:'🔁', html:'<strong>Impressões voltaram a subir:</strong> 101 na semana (+71% vs. a semana anterior), recuperando parte da queda da semana 1 — mas ainda abaixo do patamar de Junho/Julho.'},
+    {icon:'👥', html:'<strong>Seguidores seguem em trajetória constante:</strong> +25 na semana, chegando a 2.249 — soma +57 no mês até aqui, sem nenhuma semana de queda desde o início do acompanhamento.'},
+    {icon:'👁️', html:'<strong>Visualizações de perfil praticamente estáveis</strong> (324, +0,3% no mês) — interesse no perfil segue firme independente da oscilação de posts.'},
+    {icon:'🔍', html:'<strong>Aparições em busca recuaram para 20</strong> (−25,9% vs. a semana 1) — depois da forte recuperação de Julho, a métrica voltou a cair e passa a ser ponto de atenção.'},
+    {icon:'⚠️', html:'<strong>Ranking no setor caiu de Top 4% para Top 5%:</strong> reflexo direto da queda em "Pessoas certas" (7,125 → 6,6), o componente que mais perdeu força nas duas últimas semanas.'},
+    {icon:'🎯', html:'<strong>Prioridade para o resto de Agosto:</strong> direcionar conexões e interações para o público certo (componente "Pessoas certas") e seguir trabalhando "Engajamento com insights", ainda travado em 11/25.'},
   ],
 };
 
@@ -522,7 +523,7 @@ function renderTrend(){
 
   const note = document.getElementById('trend-note');
   if(currentPeriod==='Comparativo'){
-    note.textContent = 'Período completo: 07/05 a 05/08/2026 · 14 semanas de acompanhamento, com as 3 viradas de mês marcadas.';
+    note.textContent = 'Período completo: 07/05 a 12/08/2026 · 15 semanas de acompanhamento, com as 3 viradas de mês marcadas.';
   } else {
     note.textContent = `${currentPeriod} de 2026 · ${data.length} semanas.`;
   }
@@ -688,7 +689,7 @@ function render(){
     ? 'Linha do tempo completa do trimestre'
     : 'Evolução ao longo do tempo';
   document.querySelector('#sec-evolucao .sec-desc').textContent = isComparativo
-    ? 'As 14 semanas de Maio a Agosto em sequência, com as viradas de mês. Use os botões para trocar a métrica.'
+    ? 'As 15 semanas de Maio a Agosto em sequência, com as viradas de mês. Use os botões para trocar a métrica.'
     : 'Cada semana do mês selecionado. Use os botões para trocar a métrica exibida.';
 
   renderTrend();
